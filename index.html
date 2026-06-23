@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hit Project — Minecraft SMP RP</title>
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --card:#111;
+      --red:#d10000;
+      --red2:#ff1a1a;
+      --white:#f5f5f5;
+      --muted:#bdbdbd;
+      --border:#2a2a2a;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:radial-gradient(circle at top,#1a1a1a 0%,var(--bg) 60%);
+      color:var(--white);
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+      min-height:92vh;
+    }
+
+    .logo{
+      width:min(100%,420px);
+      display:block;
+      margin-bottom:18px;
+      filter:drop-shadow(0 10px 24px rgba(255,0,0,.35));
+    }
+
+    h1{
+      margin:0 0 14px;
+      font-size:clamp(2.2rem,5vw,4.8rem);
+      line-height:1.02;
+    }
+
+    .accent{color:var(--red2)}
+
+    p{
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.7;
+    }
+
+    .panel{
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:24px;
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      appearance:none;
+      border:0;
+      border-radius:14px;
+      padding:14px 18px;
+      font-weight:700;
+      text-decoration:none;
+      color:var(--white);
+      background:#222;
+      border:1px solid #3a3a3a;
+      transition:.2s transform,.2s background,.2s border;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      background:#2d2d2d;
+      border-color:#555;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,var(--red),var(--red2));
+      border-color:#ff4d4d;
+    }
+
+    .btn.primary:hover{
+      background:linear-gradient(135deg,#ff2a2a,#ff4d4d);
+    }
+
+    .btn.ghost{
+      background:transparent;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:24px;
+    }
+
+    .card{
+      background:rgba(17,17,17,.92);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      color:#fff;
+    }
+
+    .card p{
+      margin:0;
+    }
+
+    .guide{
+      margin-top:28px;
+    }
+
+    .guide ol{
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .footer{
+      margin:30px 0 10px;
+      color:#8a8a8a;
+      font-size:.95rem;
+    }
+
+    @media (max-width:900px){
+      .hero{
+        grid-template-columns:1fr;
+        min-height:auto;
+        padding-top:18px;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <img class="logo" src="logo.jpg" alt="Hit Project logo">
+        <h1>Hit <span class="accent">Project</span></h1>
+        <p>Hit Project — это Minecraft SMP RP сервер для ютуберов и Twitch-стримеров. Здесь можно строить истории, снимать контент, делать коллабы и развивать свой персонаж в живом ролевом мире.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#" onclick="return false;">Подать заявку в качестве стримера</a>
+          <a class="btn primary" href="#" onclick="return false;">Подать заявку в качестве ютубера</a>
+          <a class="btn ghost" href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Наш Discord-сервер</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 style="margin-top:0">О проекте</h2>
+        <p>Красный, белый и чёрный стиль подчёркивает характер сервера: агрессивный визуал, чистая подача и сильный акцент на контенте.</p>
+        <p>Сейчас на сайте размещены временные кнопки заявок. Позже их можно подключить к Google Forms, Discord-боту или отдельной странице с анкетой.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Для кого</h3>
+        <p>Для авторов на YouTube и стримеров Twitch, которым интересны RP, SMP и совместный контент.</p>
+      </div>
+      <div class="card">
+        <h3>Формат</h3>
+        <p>Игровой мир с ролеплеем, сюжетами, взаимодействием между участниками и ивентами.</p>
+      </div>
+      <div class="card">
+        <h3>Визуал</h3>
+        <p>Лаконичный тёмный дизайн с красными акцентами и фирменным логотипом.</p>
+      </div>
+    </section>
+
+    <section class="guide panel">
+      <h2 style="margin-top:0">Гайд по вставке в GitHub Pages</h2>
+      <ol>
+        <li>Создай репозиторий на GitHub, например <b>hit-project-site</b>.</li>
+        <li>Добавь в корень репозитория файлы <b>index.html</b> и <b>logo.jpg</b>.</li>
+        <li>Скопируй HTML-код сайта в файл <b>index.html</b>.</li>
+        <li>Если логотип называется иначе, замени строку <b>src="logo.jpg"</b> на своё имя файла.</li>
+        <li>Открой <b>Settings → Pages</b>, выбери ветку <b>main</b> и папку <b>/ (root)</b>.</li>
+        <li>Сохрани настройки и подожди 1–5 минут — сайт появится по адресу GitHub Pages.</li>
+      </ol>
+    </section>
+
+    <div class="footer">Hit Project • Minecraft SMP RP • Для ютуберов и Twitch-стримеров</div>
+  </div>
+</body>
+</html>
