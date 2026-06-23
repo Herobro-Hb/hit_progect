@@ -5,249 +5,443 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HIT PROJECT</title>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
+    :root{
+      --bg:#080808;
+      --bg2:#0f0f0f;
+      --card:#121212;
+      --card2:#171717;
+      --line:#2a2a2a;
+      --line2:#3b0000;
+      --text:#f5f5f5;
+      --muted:#b6b6b6;
+      --red:#e10000;
+      --red2:#ff2a2a;
+      --shadow:0 18px 50px rgba(0,0,0,.35);
+      --shadow2:0 10px 30px rgba(225,0,0,.13);
+      --radius:22px;
+    }
+
+    * { box-sizing:border-box; }
+
+    html, body {
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(circle at top, rgba(225,0,0,.12), transparent 30%),
+        linear-gradient(180deg, #070707 0%, #0a0a0a 100%);
+      color:var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0b;
-      color: #fff;
+      overflow-x:hidden;
     }
 
-    .page {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 18px;
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,.03) 0%, transparent 35%, rgba(255,255,255,.02) 100%);
+      pointer-events:none;
+      opacity:.25;
+      z-index:-1;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      align-items: start;
+    .page{
+      width:min(100%, 1680px);
+      margin:0 auto;
+      padding:22px;
     }
 
-    .left-col, .right-col {
-      display: grid;
-      gap: 18px;
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap:18px;
+      align-items:start;
     }
 
-    .card {
-      background: linear-gradient(180deg, #151515 0%, #0f0f0f 100%);
-      border: 1px solid #2a2a2a;
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      overflow: hidden;
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01)), linear-gradient(180deg, var(--card), #0f0f0f);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
 
-    .header-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    .card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 24px 60px rgba(0,0,0,.42), var(--shadow2);
+      border-color:#444;
     }
 
-    .icon {
-      width: 72px;
-      height: 72px;
-      object-fit: cover;
-      border-radius: 16px;
-      border: 1px solid #3a3a3a;
-      flex: 0 0 auto;
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(130deg, rgba(255,255,255,.05), transparent 32%, transparent 70%, rgba(255,255,255,.03));
+      opacity:.18;
+      pointer-events:none;
     }
 
-    .title-box {
-      flex: 1;
-      padding: 14px 18px;
-      border-radius: 18px;
-      border: 1px solid #5a0000;
-      background: linear-gradient(135deg, rgba(255,0,0,.22), rgba(0,0,0,.28));
-      display: inline-flex;
-      align-items: center;
-      min-height: 72px;
+    .pad{ padding:16px; }
+
+    .topline{
+      display:flex;
+      gap:14px;
+      align-items:center;
     }
 
-    .title-box h1 {
-      margin: 0;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      letter-spacing: 2px;
-      text-transform: uppercase;
+    .icon{
+      width:68px;
+      height:68px;
+      border-radius:18px;
+      object-fit:cover;
+      border:1px solid #444;
+      box-shadow:0 10px 24px rgba(0,0,0,.35);
+      flex:0 0 auto;
+      transform:translateZ(0);
+      transition:transform .3s ease, filter .3s ease;
     }
 
-    .mini-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
+    .card:hover .icon{
+      transform:scale(1.03) rotate(-1deg);
+      filter:brightness(1.05);
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 18px;
-      border-radius: 14px;
-      text-decoration: none;
-      color: #fff;
-      border: 1px solid #5a0000;
-      background: linear-gradient(135deg, #b00000, #ff1f1f);
-      font-weight: 700;
-      transition: .2s transform, .2s filter;
+    .titlebox{
+      flex:1;
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      padding:12px 18px;
+      border-radius:18px;
+      border:1px solid rgba(225,0,0,.35);
+      background:
+        linear-gradient(135deg, rgba(225,0,0,.25), rgba(255,255,255,.02)),
+        linear-gradient(180deg, rgba(30,30,30,.8), rgba(15,15,15,.9));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
     }
 
-    .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
-
-    .btn.secondary {
-      background: linear-gradient(135deg, #1b1b1b, #2a2a2a);
-      border-color: #3a3a3a;
+    .titlebox h1{
+      margin:0;
+      font-size:clamp(1.5rem, 2.4vw, 2.25rem);
+      letter-spacing:2.8px;
+      text-transform:uppercase;
+      text-shadow:0 0 18px rgba(225,0,0,.16);
     }
 
-    .section-title {
-      margin: 0 0 12px;
-      font-size: 1.15rem;
-      letter-spacing: .5px;
-      color: #fff;
+    .tiny{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
     }
 
-    .text {
-      margin: 0 0 12px;
-      color: #c9c9c9;
-      line-height: 1.6;
-      font-size: 0.98rem;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(135deg, var(--red), var(--red2));
+      box-shadow:0 10px 24px rgba(225,0,0,.18);
+      transition:transform .22s ease, filter .22s ease, box-shadow .22s ease;
+      will-change:transform;
     }
 
-    .image {
-      width: 100%;
-      display: block;
-      border-radius: 16px;
-      border: 1px solid #2f2f2f;
-      object-fit: cover;
+    .btn:hover{
+      transform:translateY(-2px);
+      filter:saturate(1.08) brightness(1.05);
+      box-shadow:0 14px 30px rgba(225,0,0,.25);
     }
 
-    .small-image {
-      width: 100%;
-      max-height: 210px;
-      object-fit: cover;
+    .btn.secondary{
+      background:linear-gradient(135deg, #1a1a1a, #2b2b2b);
+      box-shadow:none;
+      border-color:#333;
     }
 
-    .stat-box {
-      display: grid;
-      gap: 12px;
+    .btn.secondary:hover{
+      box-shadow:0 12px 22px rgba(0,0,0,.25);
     }
 
-    .participant-wrap {
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-color: #ff1f1f #1d1d1d;
+    .section-title{
+      margin:0 0 10px;
+      font-size:1.02rem;
+      letter-spacing:.6px;
+      text-transform:uppercase;
     }
 
-    .participant-list {
-      display: flex;
-      gap: 12px;
-      min-width: max-content;
+    .text{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.95rem;
     }
 
-    .participant {
-      flex: 0 0 auto;
-      min-width: 150px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid #303030;
-      background: linear-gradient(180deg, #171717, #101010);
-      text-align: center;
-      font-weight: 700;
-      color: #fff;
+    .small-note{
+      margin-top:10px;
+      color:#d8d8d8;
+      font-size:.9rem;
     }
 
-    .bottom-banner {
-      margin-top: 18px;
+    .image{
+      width:100%;
+      display:block;
+      border-radius:18px;
+      border:1px solid #303030;
+      object-fit:cover;
+      transition:transform .3s ease, filter .3s ease;
     }
 
-    .bottom-banner img {
-      width: 100%;
-      display: block;
-      border-radius: 22px;
-      border: 1px solid #2f2f2f;
-      object-fit: cover;
+    .image:hover{
+      transform:scale(1.01);
+      filter:brightness(1.03);
     }
 
-    .muted {
-      color: #b5b5b5;
+    .map-image{
+      max-height:170px;
+      object-fit:cover;
     }
 
-    @media (max-width: 1000px) {
-      .layout {
-        grid-template-columns: 1fr;
+    .right-grid{
+      display:grid;
+      gap:18px;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .content{
+      margin-top:18px;
+      display:grid;
+      gap:18px;
+    }
+
+    .application-desc{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      margin:14px 0;
+    }
+
+    .members-shell{
+      display:grid;
+      grid-template-columns:1fr 1fr 1.25fr;
+      gap:0;
+      overflow:hidden;
+    }
+
+    .member-col{
+      min-height:210px;
+      padding:14px;
+      position:relative;
+    }
+
+    .member-col + .member-col{
+      border-left:1px solid var(--line);
+    }
+
+    .member-head{
+      margin:0 0 10px;
+      font-size:.95rem;
+      color:#fff;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .scroll-y{
+      height:150px;
+      overflow-y:auto;
+      padding-right:6px;
+      scrollbar-color: #ff2a2a #1a1a1a;
+    }
+
+    .name-list{
+      display:grid;
+      gap:8px;
+    }
+
+    .name{
+      padding:10px 12px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid #2f2f2f;
+      color:#fff;
+      font-weight:700;
+      text-align:center;
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .name:hover{
+      transform:translateX(2px);
+      background:linear-gradient(180deg, rgba(225,0,0,.16), rgba(255,255,255,.03));
+      border-color:#4a1717;
+    }
+
+    .banner{
+      margin-top:18px;
+    }
+
+    .banner img{
+      width:100%;
+      display:block;
+      border-radius:24px;
+      border:1px solid #2f2f2f;
+      box-shadow:var(--shadow);
+    }
+
+    .soft{
+      color:#e6e6e6;
+    }
+
+    @media (max-width: 1160px){
+      .hero, .two-col, .members-shell{
+        grid-template-columns:1fr;
       }
+      .member-col + .member-col{
+        border-left:none;
+        border-top:1px solid var(--line);
+      }
+      .scroll-y{
+        height:160px;
+      }
+    }
+
+    @media (max-width: 720px){
+      .page{ padding:14px; }
+      .topline{ flex-direction:column; align-items:stretch; }
+      .icon{ width:100%; height:110px; border-radius:16px; }
+      .titlebox{ min-height:auto; }
+      .btn{ width:100%; }
+      .card{ border-radius:18px; }
+      .pad{ padding:14px; }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="layout">
-      <div class="left-col">
-        <div class="card">
-          <div class="header-top">
-            <img class="icon" src="hitik.jpg" alt="hitik">
-            <div class="title-box">
-              <h1>HIT PROJECT</h1>
-            </div>
-          </div>
-
-          <div class="mini-buttons">
-            <a class="btn" href="#" onclick="return false;">Подать заявку на ютубера</a>
-            <a class="btn" href="#" onclick="return false;">Подать заявку на стримера</a>
+    <div class="hero">
+      <div class="card pad">
+        <div class="topline">
+          <img class="icon" src="hitik.jpg" alt="hitik">
+          <div class="titlebox">
+            <h1>HIT PROJECT</h1>
           </div>
         </div>
 
-        <div class="card">
-          <h2 class="section-title">Онлайн карта сервера</h2>
-          <p class="text">Ссылка на карту будет ниже, чтобы участники могли быстро открыть её и посмотреть мир сервера.</p>
-          <p class="text"><a href="#" onclick="return false;" style="color:#ff4a4a;text-decoration:none;">https://your-map-link-here</a></p>
-          <img class="image" src="karta.jpg" alt="karta">
+        <div class="tiny">
+          <a class="btn" href="#" onclick="return false;">Подать заявку на ютубера</a>
+          <a class="btn" href="#" onclick="return false;">Подать заявку на стримера</a>
+          <a class="btn secondary" href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Discord-сервер</a>
+        </div>
+
+        <div class="application-desc">
+          <h2 class="section-title">О заявках</h2>
+          <p class="text">
+            Через кнопки ниже можно будет отправлять заявку на участие в проекте.
+            Пока это временные кнопки, позже мы подключим форму и отправку в Discord.
+          </p>
         </div>
       </div>
 
-      <div class="right-col">
-        <div class="card stat-box">
+      <div class="right-grid">
+        <div class="card pad">
           <h2 class="section-title">Экономика сервера</h2>
-          <img class="image small-image" src="topi.jpg" alt="economy">
+          <img class="image map-image" src="topi.jpg" alt="economy">
+          <div class="divider"></div>
           <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
         </div>
 
-        <div class="card stat-box">
+        <div class="card pad">
           <h2 class="section-title">Топы по кол-ву ар</h2>
-          <img class="image small-image" src="topi.jpg" alt="topi">
-          <p class="text">Здесь будет отображаться топ игроков по количеству AR на сервере.</p>
+          <img class="image map-image" src="topi.jpg" alt="topi">
+          <div class="divider"></div>
+          <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере.</p>
         </div>
       </div>
     </div>
 
-    <div class="card" style="margin-top:18px;">
-      <h2 class="section-title">Участники сервера</h2>
-      <p class="text">Список можно листать влево-вправо.</p>
-      <div class="participant-wrap">
-        <div class="participant-list">
-          <div class="participant">Vexor</div>
-          <div class="participant">MisterFox</div>
-          <div class="participant">Rake</div>
-          <div class="participant">Lunarix</div>
-          <div class="participant">Brawler</div>
-          <div class="participant">KiraPlay</div>
-          <div class="participant">StormNix</div>
-          <div class="participant">PixelYT</div>
-          <div class="participant">NeroLive</div>
-          <div class="participant">Drako</div>
-          <div class="participant">Astra</div>
-          <div class="participant">Hollow</div>
-          <div class="participant">Rift</div>
-          <div class="participant">SovaMC</div>
-          <div class="participant">Frosty</div>
+    <div class="content">
+      <div class="card pad">
+        <h2 class="section-title">Онлайн карта сервера</h2>
+        <p class="text soft">Ссылка на карту ниже, чтобы быстро открыть мир и посмотреть сервер.</p>
+        <p class="small-note"><a href="#" onclick="return false;" style="color:#ff4a4a;text-decoration:none;">https://your-map-link-here</a></p>
+        <div style="margin-top:12px; max-width:560px;">
+          <img class="image map-image" src="karta.jpg" alt="karta">
         </div>
       </div>
-    </div>
 
-    <div class="bottom-banner">
-      <img src="hit_ban.jpg" alt="hit_ban">
+      <div class="card pad">
+        <h2 class="section-title">Участники сервера</h2>
+        <p class="text">Компактный список участников с тремя отсеками. В третьем отсеке есть вертикальная прокрутка.</p>
+        <div class="divider"></div>
+
+        <div class="members-shell">
+          <div class="member-col">
+            <div class="member-head">Отсек 1</div>
+            <div class="name-list">
+              <div class="name">Vexor</div>
+              <div class="name">MisterFox</div>
+              <div class="name">Rake</div>
+              <div class="name">Lunarix</div>
+              <div class="name">Brawler</div>
+            </div>
+          </div>
+
+          <div class="member-col">
+            <div class="member-head">Отсек 2</div>
+            <div class="name-list">
+              <div class="name">KiraPlay</div>
+              <div class="name">StormNix</div>
+              <div class="name">PixelYT</div>
+              <div class="name">NeroLive</div>
+              <div class="name">Drako</div>
+            </div>
+          </div>
+
+          <div class="member-col">
+            <div class="member-head">Отсек 3 — прокрутка</div>
+            <div class="scroll-y">
+              <div class="name-list">
+                <div class="name">Astra</div>
+                <div class="name">Hollow</div>
+                <div class="name">Rift</div>
+                <div class="name">SovaMC</div>
+                <div class="name">Frosty</div>
+                <div class="name">NeonVlad</div>
+                <div class="name">DarkLynx</div>
+                <div class="name">Moroz</div>
+                <div class="name">ZeroOne</div>
+                <div class="name">JollyCraft</div>
+                <div class="name">Zyra</div>
+                <div class="name">Maverik</div>
+                <div class="name">Echo</div>
+                <div class="name">NinjaPro</div>
+                <div class="name">Velor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="banner">
+        <img src="hit_ban.jpg" alt="hit_ban">
+      </div>
     </div>
   </div>
 </body>
