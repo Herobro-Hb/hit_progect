@@ -3,207 +3,252 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hit Project — Minecraft SMP RP</title>
+  <title>HIT PROJECT</title>
   <style>
-    :root{
-      --bg:#0b0b0b;
-      --card:#111;
-      --red:#d10000;
-      --red2:#ff1a1a;
-      --white:#f5f5f5;
-      --muted:#bdbdbd;
-      --border:#2a2a2a;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:radial-gradient(circle at top,#1a1a1a 0%,var(--bg) 60%);
-      color:var(--white);
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 18px;
     }
 
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:24px;
+    .layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
     }
 
-    .hero{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:24px;
-      align-items:center;
-      min-height:92vh;
+    .left-col, .right-col {
+      display: grid;
+      gap: 18px;
     }
 
-    .logo{
-      width:min(100%,420px);
-      display:block;
-      margin-bottom:18px;
-      filter:drop-shadow(0 10px 24px rgba(255,0,0,.35));
+    .card {
+      background: linear-gradient(180deg, #151515 0%, #0f0f0f 100%);
+      border: 1px solid #2a2a2a;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      overflow: hidden;
     }
 
-    h1{
-      margin:0 0 14px;
-      font-size:clamp(2.2rem,5vw,4.8rem);
-      line-height:1.02;
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .accent{color:var(--red2)}
-
-    p{
-      color:var(--muted);
-      font-size:1.05rem;
-      line-height:1.7;
+    .icon {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid #3a3a3a;
+      flex: 0 0 auto;
     }
 
-    .panel{
-      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:24px;
-      box-shadow:0 20px 50px rgba(0,0,0,.35);
+    .title-box {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 18px;
+      border: 1px solid #5a0000;
+      background: linear-gradient(135deg, rgba(255,0,0,.22), rgba(0,0,0,.28));
+      display: inline-flex;
+      align-items: center;
+      min-height: 72px;
     }
 
-    .buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:18px;
+    .title-box h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    .btn{
-      appearance:none;
-      border:0;
-      border-radius:14px;
-      padding:14px 18px;
-      font-weight:700;
-      text-decoration:none;
-      color:var(--white);
-      background:#222;
-      border:1px solid #3a3a3a;
-      transition:.2s transform,.2s background,.2s border;
+    .mini-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
     }
 
-    .btn:hover{
-      transform:translateY(-2px);
-      background:#2d2d2d;
-      border-color:#555;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid #5a0000;
+      background: linear-gradient(135deg, #b00000, #ff1f1f);
+      font-weight: 700;
+      transition: .2s transform, .2s filter;
     }
 
-    .btn.primary{
-      background:linear-gradient(135deg,var(--red),var(--red2));
-      border-color:#ff4d4d;
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+    .btn.secondary {
+      background: linear-gradient(135deg, #1b1b1b, #2a2a2a);
+      border-color: #3a3a3a;
     }
 
-    .btn.primary:hover{
-      background:linear-gradient(135deg,#ff2a2a,#ff4d4d);
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      letter-spacing: .5px;
+      color: #fff;
     }
 
-    .btn.ghost{
-      background:transparent;
+    .text {
+      margin: 0 0 12px;
+      color: #c9c9c9;
+      line-height: 1.6;
+      font-size: 0.98rem;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-top:24px;
+    .image {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid #2f2f2f;
+      object-fit: cover;
     }
 
-    .card{
-      background:rgba(17,17,17,.92);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px;
+    .small-image {
+      width: 100%;
+      max-height: 210px;
+      object-fit: cover;
     }
 
-    .card h3{
-      margin:0 0 10px;
-      color:#fff;
+    .stat-box {
+      display: grid;
+      gap: 12px;
     }
 
-    .card p{
-      margin:0;
+    .participant-wrap {
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-color: #ff1f1f #1d1d1d;
     }
 
-    .guide{
-      margin-top:28px;
+    .participant-list {
+      display: flex;
+      gap: 12px;
+      min-width: max-content;
     }
 
-    .guide ol{
-      color:var(--muted);
-      line-height:1.8;
+    .participant {
+      flex: 0 0 auto;
+      min-width: 150px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid #303030;
+      background: linear-gradient(180deg, #171717, #101010);
+      text-align: center;
+      font-weight: 700;
+      color: #fff;
     }
 
-    .footer{
-      margin:30px 0 10px;
-      color:#8a8a8a;
-      font-size:.95rem;
+    .bottom-banner {
+      margin-top: 18px;
     }
 
-    @media (max-width:900px){
-      .hero{
-        grid-template-columns:1fr;
-        min-height:auto;
-        padding-top:18px;
-      }
+    .bottom-banner img {
+      width: 100%;
+      display: block;
+      border-radius: 22px;
+      border: 1px solid #2f2f2f;
+      object-fit: cover;
+    }
 
-      .grid{
-        grid-template-columns:1fr;
+    .muted {
+      color: #b5b5b5;
+    }
+
+    @media (max-width: 1000px) {
+      .layout {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-<div>
-  <img class="logo" src="logo.jpg" alt="Hit Project logo">
-  <p>Hit Project — это Minecraft SMP RP сервер для ютуберов и Twitch-стримеров. Здесь можно строить истории, снимать контент, делать коллабы и развивать свой персонаж в живом ролевом мире.</p>
-  <div class="buttons">
-    <a class="btn primary" href="#" onclick="return false;">Подать заявку в качестве стримера</a>
-    <a class="btn primary" href="#" onclick="return false;">Подать заявку в качестве ютубера</a>
-    <a class="btn ghost" href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Наш Discord-сервер</a>
-  </div>
-</div>
+  <div class="page">
+    <div class="layout">
+      <div class="left-col">
+        <div class="card">
+          <div class="header-top">
+            <img class="icon" src="hitik.jpg" alt="hitik">
+            <div class="title-box">
+              <h1>HIT PROJECT</h1>
+            </div>
+          </div>
 
-      <div class="panel">
-        <h2 style="margin-top:0">О проекте</h2>
-        <p>Красный, белый и чёрный стиль подчёркивает характер сервера: агрессивный визуал, чистая подача и сильный акцент на контенте.</p>
-        <p>Сейчас на сайте размещены временные кнопки заявок. Позже их можно подключить к Google Forms, Discord-боту или отдельной странице с анкетой.</p>
-      </div>
-    </section>
+          <div class="mini-buttons">
+            <a class="btn" href="#" onclick="return false;">Подать заявку на ютубера</a>
+            <a class="btn" href="#" onclick="return false;">Подать заявку на стримера</a>
+          </div>
+        </div>
 
-    <section class="grid">
-      <div class="card">
-        <h3>Для кого</h3>
-        <p>Для авторов на YouTube и стримеров Twitch, которым интересны RP, SMP и совместный контент.</p>
+        <div class="card">
+          <h2 class="section-title">Онлайн карта сервера</h2>
+          <p class="text">Ссылка на карту будет ниже, чтобы участники могли быстро открыть её и посмотреть мир сервера.</p>
+          <p class="text"><a href="#" onclick="return false;" style="color:#ff4a4a;text-decoration:none;">https://your-map-link-here</a></p>
+          <img class="image" src="karta.jpg" alt="karta">
+        </div>
       </div>
-      <div class="card">
-        <h3>Формат</h3>
-        <p>Игровой мир с ролеплеем, сюжетами, взаимодействием между участниками и ивентами.</p>
-      </div>
-      <div class="card">
-        <h3>Визуал</h3>
-        <p>Лаконичный тёмный дизайн с красными акцентами и фирменным логотипом.</p>
-      </div>
-    </section>
 
-    <section class="guide panel">
-      <h2 style="margin-top:0">Гайд по вставке в GitHub Pages</h2>
-      <ol>
-        <li>Создай репозиторий на GitHub, например <b>hit-project-site</b>.</li>
-        <li>Добавь в корень репозитория файлы <b>index.html</b> и <b>logo.jpg</b>.</li>
-        <li>Скопируй HTML-код сайта в файл <b>index.html</b>.</li>
-        <li>Если логотип называется иначе, замени строку <b>src="logo.jpg"</b> на своё имя файла.</li>
-        <li>Открой <b>Settings → Pages</b>, выбери ветку <b>main</b> и папку <b>/ (root)</b>.</li>
-        <li>Сохрани настройки и подожди 1–5 минут — сайт появится по адресу GitHub Pages.</li>
-      </ol>
-    </section>
+      <div class="right-col">
+        <div class="card stat-box">
+          <h2 class="section-title">Экономика сервера</h2>
+          <img class="image small-image" src="topi.jpg" alt="economy">
+          <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
+        </div>
 
-    <div class="footer">Hit Project • Minecraft SMP RP • Для ютуберов и Twitch-стримеров</div>
+        <div class="card stat-box">
+          <h2 class="section-title">Топы по кол-ву ар</h2>
+          <img class="image small-image" src="topi.jpg" alt="topi">
+          <p class="text">Здесь будет отображаться топ игроков по количеству AR на сервере.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <h2 class="section-title">Участники сервера</h2>
+      <p class="text">Список можно листать влево-вправо.</p>
+      <div class="participant-wrap">
+        <div class="participant-list">
+          <div class="participant">Vexor</div>
+          <div class="participant">MisterFox</div>
+          <div class="participant">Rake</div>
+          <div class="participant">Lunarix</div>
+          <div class="participant">Brawler</div>
+          <div class="participant">KiraPlay</div>
+          <div class="participant">StormNix</div>
+          <div class="participant">PixelYT</div>
+          <div class="participant">NeroLive</div>
+          <div class="participant">Drako</div>
+          <div class="participant">Astra</div>
+          <div class="participant">Hollow</div>
+          <div class="participant">Rift</div>
+          <div class="participant">SovaMC</div>
+          <div class="participant">Frosty</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-banner">
+      <img src="hit_ban.jpg" alt="hit_ban">
+    </div>
   </div>
 </body>
 </html>
