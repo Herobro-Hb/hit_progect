@@ -6,31 +6,29 @@
   <title>HIT PROJECT</title>
   <style>
     :root{
-      --bg:#080808;
-      --bg2:#0f0f0f;
-      --card:#121212;
-      --card2:#171717;
-      --line:#2a2a2a;
-      --line2:#3b0000;
+      --bg:#070707;
+      --panel:#111111;
+      --panel2:#151515;
+      --line:#2b2b2b;
+      --line2:#4a0000;
       --text:#f5f5f5;
-      --muted:#b6b6b6;
-      --red:#e10000;
-      --red2:#ff2a2a;
-      --shadow:0 18px 50px rgba(0,0,0,.35);
-      --shadow2:0 10px 30px rgba(225,0,0,.13);
+      --muted:#b7b7b7;
+      --red:#d70000;
+      --red2:#ff2b2b;
       --radius:22px;
+      --shadow:0 18px 48px rgba(0,0,0,.38);
+      --shadow-red:0 12px 28px rgba(215,0,0,.16);
     }
 
-    * { box-sizing:border-box; }
-
-    html, body {
+    *{box-sizing:border-box}
+    html,body{
       margin:0;
       padding:0;
       background:
-        radial-gradient(circle at top, rgba(225,0,0,.12), transparent 30%),
+        radial-gradient(circle at top, rgba(215,0,0,.12), transparent 28%),
         linear-gradient(180deg, #070707 0%, #0a0a0a 100%);
       color:var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       overflow-x:hidden;
     }
 
@@ -38,68 +36,68 @@
       content:"";
       position:fixed;
       inset:0;
-      background:
-        linear-gradient(120deg, rgba(255,255,255,.03) 0%, transparent 35%, rgba(255,255,255,.02) 100%);
+      background:linear-gradient(120deg, rgba(255,255,255,.03), transparent 24%, rgba(255,255,255,.015));
       pointer-events:none;
       opacity:.25;
       z-index:-1;
     }
 
     .page{
-      width:min(100%, 1680px);
+      width:min(100%, 1720px);
       margin:0 auto;
       padding:22px;
     }
 
-    .hero{
+    .top-grid{
       display:grid;
-      grid-template-columns: 1.25fr .9fr;
+      grid-template-columns: 1.25fr .95fr .95fr;
       gap:18px;
       align-items:start;
     }
 
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01)), linear-gradient(180deg, var(--card), #0f0f0f);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), linear-gradient(180deg, var(--panel), #0f0f0f);
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
       transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      animation:fadeUp .6s ease both;
     }
 
     .card:hover{
       transform:translateY(-3px);
-      box-shadow:0 24px 60px rgba(0,0,0,.42), var(--shadow2);
-      border-color:#444;
+      border-color:#404040;
+      box-shadow:0 24px 60px rgba(0,0,0,.45), var(--shadow-red);
     }
 
     .card::after{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(130deg, rgba(255,255,255,.05), transparent 32%, transparent 70%, rgba(255,255,255,.03));
+      background:linear-gradient(135deg, rgba(255,255,255,.05), transparent 30%, transparent 70%, rgba(255,255,255,.03));
       opacity:.18;
       pointer-events:none;
     }
 
     .pad{ padding:16px; }
 
-    .topline{
+    .head{
       display:flex;
       gap:14px;
       align-items:center;
+      margin-bottom:14px;
     }
 
     .icon{
-      width:68px;
-      height:68px;
+      width:72px;
+      height:72px;
       border-radius:18px;
-      object-fit:cover;
       border:1px solid #444;
-      box-shadow:0 10px 24px rgba(0,0,0,.35);
+      object-fit:cover;
       flex:0 0 auto;
-      transform:translateZ(0);
+      box-shadow:0 10px 20px rgba(0,0,0,.32);
       transition:transform .3s ease, filter .3s ease;
     }
 
@@ -110,54 +108,70 @@
 
     .titlebox{
       flex:1;
-      min-height:68px;
+      min-height:72px;
+      border-radius:18px;
+      padding:12px 18px;
       display:flex;
       align-items:center;
-      padding:12px 18px;
-      border-radius:18px;
-      border:1px solid rgba(225,0,0,.35);
+      border:1px solid rgba(215,0,0,.35);
       background:
-        linear-gradient(135deg, rgba(225,0,0,.25), rgba(255,255,255,.02)),
-        linear-gradient(180deg, rgba(30,30,30,.8), rgba(15,15,15,.9));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+        linear-gradient(135deg, rgba(215,0,0,.26), rgba(255,255,255,.02)),
+        linear-gradient(180deg, rgba(34,34,34,.9), rgba(17,17,17,.95));
     }
 
     .titlebox h1{
       margin:0;
-      font-size:clamp(1.5rem, 2.4vw, 2.25rem);
+      font-size:clamp(1.6rem, 2.4vw, 2.35rem);
       letter-spacing:2.8px;
       text-transform:uppercase;
-      text-shadow:0 0 18px rgba(225,0,0,.16);
+      text-shadow:0 0 16px rgba(215,0,0,.15);
     }
 
-    .tiny{
+    .section-title{
+      margin:0 0 10px;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      font-size:1.02rem;
+    }
+
+    .text{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.95rem;
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      margin:14px 0;
+    }
+
+    .tiny-actions{
       display:flex;
       gap:12px;
       flex-wrap:wrap;
-      margin-top:14px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
       padding:12px 16px;
       border-radius:14px;
-      color:#fff;
       text-decoration:none;
+      color:#fff;
       font-weight:700;
       border:1px solid rgba(255,255,255,.08);
       background:linear-gradient(135deg, var(--red), var(--red2));
-      box-shadow:0 10px 24px rgba(225,0,0,.18);
+      box-shadow:0 10px 24px rgba(215,0,0,.18);
       transition:transform .22s ease, filter .22s ease, box-shadow .22s ease;
-      will-change:transform;
     }
 
     .btn:hover{
       transform:translateY(-2px);
       filter:saturate(1.08) brightness(1.05);
-      box-shadow:0 14px 30px rgba(225,0,0,.25);
+      box-shadow:0 14px 30px rgba(215,0,0,.26);
     }
 
     .btn.secondary{
@@ -168,26 +182,6 @@
 
     .btn.secondary:hover{
       box-shadow:0 12px 22px rgba(0,0,0,.25);
-    }
-
-    .section-title{
-      margin:0 0 10px;
-      font-size:1.02rem;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-    }
-
-    .text{
-      margin:0;
-      color:var(--muted);
-      line-height:1.65;
-      font-size:.95rem;
-    }
-
-    .small-note{
-      margin-top:10px;
-      color:#d8d8d8;
-      font-size:.9rem;
     }
 
     .image{
@@ -205,70 +199,21 @@
     }
 
     .map-image{
-      max-height:170px;
-      object-fit:cover;
+      max-height:168px;
     }
 
-    .right-grid{
-      display:grid;
-      gap:18px;
-    }
-
-    .two-col{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-      margin-top:18px;
-    }
-
-    .content{
+    .mid-grid{
       margin-top:18px;
       display:grid;
+      grid-template-columns:1fr 1fr 1.2fr;
       gap:18px;
-    }
-
-    .application-desc{
-      margin-top:12px;
-      padding-top:12px;
-      border-top:1px solid var(--line);
-    }
-
-    .divider{
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
-      margin:14px 0;
-    }
-
-    .members-shell{
-      display:grid;
-      grid-template-columns:1fr 1fr 1.25fr;
-      gap:0;
-      overflow:hidden;
-    }
-
-    .member-col{
-      min-height:210px;
-      padding:14px;
-      position:relative;
-    }
-
-    .member-col + .member-col{
-      border-left:1px solid var(--line);
-    }
-
-    .member-head{
-      margin:0 0 10px;
-      font-size:.95rem;
-      color:#fff;
-      text-transform:uppercase;
-      letter-spacing:.7px;
     }
 
     .scroll-y{
-      height:150px;
+      max-height:210px;
       overflow-y:auto;
       padding-right:6px;
-      scrollbar-color: #ff2a2a #1a1a1a;
+      scrollbar-color:#ff2b2b #1a1a1a;
     }
 
     .name-list{
@@ -279,17 +224,16 @@
     .name{
       padding:10px 12px;
       border-radius:12px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid #2f2f2f;
-      color:#fff;
-      font-weight:700;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       text-align:center;
-      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+      font-weight:700;
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
     .name:hover{
       transform:translateX(2px);
-      background:linear-gradient(180deg, rgba(225,0,0,.16), rgba(255,255,255,.03));
+      background:linear-gradient(180deg, rgba(215,0,0,.14), rgba(255,255,255,.03));
       border-color:#4a1717;
     }
 
@@ -305,28 +249,25 @@
       box-shadow:var(--shadow);
     }
 
-    .soft{
-      color:#e6e6e6;
+    .small-note{
+      color:#ddd;
+      font-size:.9rem;
+      margin-top:10px;
     }
 
-    @media (max-width: 1160px){
-      .hero, .two-col, .members-shell{
-        grid-template-columns:1fr;
-      }
-      .member-col + .member-col{
-        border-left:none;
-        border-top:1px solid var(--line);
-      }
-      .scroll-y{
-        height:160px;
-      }
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(14px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    @media (max-width: 1280px){
+      .top-grid,.mid-grid{ grid-template-columns:1fr; }
     }
 
     @media (max-width: 720px){
       .page{ padding:14px; }
-      .topline{ flex-direction:column; align-items:stretch; }
-      .icon{ width:100%; height:110px; border-radius:16px; }
-      .titlebox{ min-height:auto; }
+      .head{ flex-direction:column; align-items:stretch; }
+      .icon{ width:100%; height:110px; }
       .btn{ width:100%; }
       .card{ border-radius:18px; }
       .pad{ padding:14px; }
@@ -335,113 +276,80 @@
 </head>
 <body>
   <div class="page">
-    <div class="hero">
+    <div class="top-grid">
       <div class="card pad">
-        <div class="topline">
+        <div class="head">
           <img class="icon" src="hitik.jpg" alt="hitik">
           <div class="titlebox">
             <h1>HIT PROJECT</h1>
           </div>
         </div>
 
-        <div class="tiny">
+        <div class="tiny-actions">
           <a class="btn" href="#" onclick="return false;">Подать заявку на ютубера</a>
           <a class="btn" href="#" onclick="return false;">Подать заявку на стримера</a>
           <a class="btn secondary" href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Discord-сервер</a>
         </div>
 
-        <div class="application-desc">
-          <h2 class="section-title">О заявках</h2>
-          <p class="text">
-            Через кнопки ниже можно будет отправлять заявку на участие в проекте.
-            Пока это временные кнопки, позже мы подключим форму и отправку в Discord.
-          </p>
-        </div>
+        <div class="divider"></div>
+
+        <h2 class="section-title">О заявках</h2>
+        <p class="text">
+          Здесь будут формы для подачи заявки на участие в проекте.
+          Позже мы подключим их к отправке в Discord через вебхук.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2 class="section-title">Онлайн карта сервера</h2>
+        <p class="small-note"><a href="#" onclick="return false;" style="color:#ff4a4a;text-decoration:none;">https://your-map-link-here</a></p>
+        <img class="image map-image" src="karta.jpg" alt="karta">
       </div>
 
-      <div class="right-grid">
-        <div class="card pad">
-          <h2 class="section-title">Экономика сервера</h2>
-          <img class="image map-image" src="topi.jpg" alt="economy">
-          <div class="divider"></div>
-          <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
-        </div>
+      <div class="card pad">
+        <h2 class="section-title">Экономика сервера</h2>
+        <img class="image map-image" src="topi.jpg" alt="economy">
+        <div class="divider"></div>
+        <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
+      </div>
 
-        <div class="card pad">
-          <h2 class="section-title">Топы по кол-ву ар</h2>
-          <img class="image map-image" src="topi.jpg" alt="topi">
-          <div class="divider"></div>
-          <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере.</p>
+      <div class="card pad">
+        <h2 class="section-title">Топы по кол-ву ар</h2>
+        <img class="image map-image" src="topi.jpg" alt="topi">
+        <div class="divider"></div>
+        <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере.</p>
+      </div>
+    </div>
+
+    <div class="mid-grid">
+      <div class="card pad" style="grid-column: 3 / 4;">
+        <h2 class="section-title">Участники сервера</h2>
+        <p class="text">Список с вертикальной прокруткой.</p>
+        <div class="divider"></div>
+        <div class="scroll-y">
+          <div class="name-list">
+            <div class="name">Vexor</div>
+            <div class="name">MisterFox</div>
+            <div class="name">Rake</div>
+            <div class="name">Lunarix</div>
+            <div class="name">Brawler</div>
+            <div class="name">KiraPlay</div>
+            <div class="name">StormNix</div>
+            <div class="name">PixelYT</div>
+            <div class="name">NeroLive</div>
+            <div class="name">Drako</div>
+            <div class="name">Astra</div>
+            <div class="name">Hollow</div>
+            <div class="name">Rift</div>
+            <div class="name">SovaMC</div>
+            <div class="name">Frosty</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="content">
-      <div class="card pad">
-        <h2 class="section-title">Онлайн карта сервера</h2>
-        <p class="text soft">Ссылка на карту ниже, чтобы быстро открыть мир и посмотреть сервер.</p>
-        <p class="small-note"><a href="#" onclick="return false;" style="color:#ff4a4a;text-decoration:none;">https://your-map-link-here</a></p>
-        <div style="margin-top:12px; max-width:560px;">
-          <img class="image map-image" src="karta.jpg" alt="karta">
-        </div>
-      </div>
-
-      <div class="card pad">
-        <h2 class="section-title">Участники сервера</h2>
-        <p class="text">Компактный список участников с тремя отсеками. В третьем отсеке есть вертикальная прокрутка.</p>
-        <div class="divider"></div>
-
-        <div class="members-shell">
-          <div class="member-col">
-            <div class="member-head">Отсек 1</div>
-            <div class="name-list">
-              <div class="name">Vexor</div>
-              <div class="name">MisterFox</div>
-              <div class="name">Rake</div>
-              <div class="name">Lunarix</div>
-              <div class="name">Brawler</div>
-            </div>
-          </div>
-
-          <div class="member-col">
-            <div class="member-head">Отсек 2</div>
-            <div class="name-list">
-              <div class="name">KiraPlay</div>
-              <div class="name">StormNix</div>
-              <div class="name">PixelYT</div>
-              <div class="name">NeroLive</div>
-              <div class="name">Drako</div>
-            </div>
-          </div>
-
-          <div class="member-col">
-            <div class="member-head">Отсек 3 — прокрутка</div>
-            <div class="scroll-y">
-              <div class="name-list">
-                <div class="name">Astra</div>
-                <div class="name">Hollow</div>
-                <div class="name">Rift</div>
-                <div class="name">SovaMC</div>
-                <div class="name">Frosty</div>
-                <div class="name">NeonVlad</div>
-                <div class="name">DarkLynx</div>
-                <div class="name">Moroz</div>
-                <div class="name">ZeroOne</div>
-                <div class="name">JollyCraft</div>
-                <div class="name">Zyra</div>
-                <div class="name">Maverik</div>
-                <div class="name">Echo</div>
-                <div class="name">NinjaPro</div>
-                <div class="name">Velor</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="banner">
-        <img src="hit_ban.jpg" alt="hit_ban">
-      </div>
+    <div class="banner">
+      <img src="hit_ban.jpg" alt="hit_ban">
     </div>
   </div>
 </body>
