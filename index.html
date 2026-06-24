@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HIT PROJECT</title>
+  <title>Информация</title>
   <style>
     :root{
-      --bg:#060606;
       --panel:#111111;
       --panel2:#151515;
       --line:#2b2b2b;
@@ -25,8 +24,9 @@
       margin:0;
       padding:0;
       background:
-        radial-gradient(circle at top, rgba(215,0,0,.12), transparent 28%),
-        linear-gradient(180deg, #060606 0%, #0a0a0a 100%);
+        radial-gradient(circle at 50% 50%, rgba(215,0,0,.16), transparent 28%),
+        linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.75) 100%),
+        url('fonchik.jpg') center/cover fixed;
       color:var(--text);
       font-family:Arial, Helvetica, sans-serif;
       overflow-x:hidden;
@@ -212,18 +212,6 @@
       border-color:#4a1717;
     }
 
-    .banner{
-      margin-top:18px;
-    }
-
-    .banner img{
-      width:100%;
-      display:block;
-      border-radius:24px;
-      border:1px solid #2f2f2f;
-      box-shadow:var(--shadow);
-    }
-
     .small-note{
       color:#ddd;
       font-size:.9rem;
@@ -330,7 +318,7 @@
         <div class="head">
           <img class="icon" src="hitik.jpg" alt="hitik">
           <div class="titlebox">
-            <h1>HIT PROJECT</h1>
+            <h1>ИНФОРМАЦИЯ</h1>
           </div>
         </div>
 
@@ -344,8 +332,8 @@
 
         <h2 class="section-title">О заявках</h2>
         <p class="text">
-          Здесь будут формы для подачи заявки на участие в проекте.
-          Позже мы подключим их к отправке в Discord через вебхук.
+          Здесь доступна форма для подачи заявки на участие в проекте.
+          Заполните её, и ваша заявка будет отправлена на рассмотрение.
         </p>
 
         <div class="divider"></div>
@@ -373,7 +361,6 @@
 
       <div class="col">
         <h2 class="section-title">Участники сервера</h2>
-        <p class="text">Список с вертикальной прокруткой.</p>
         <div class="divider"></div>
         <div class="scroll-y">
           <div class="name-list">
@@ -395,10 +382,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="banner">
-      <img src="hit_ban.jpg" alt="hit_ban">
     </div>
   </div>
 
@@ -435,6 +418,14 @@
       if(e.key === 'Escape' && modal.classList.contains('active')){
         closeModal();
       }
+    });
+
+    // Parallax background movement
+    const page = document.querySelector('.page');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      document.body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
     });
   </script>
 </body>
