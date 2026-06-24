@@ -172,6 +172,7 @@
       border:1px solid #303030;
       object-fit:cover;
       transition:transform .3s ease, filter .3s ease;
+      cursor:pointer;
     }
 
     .image:hover{
@@ -234,6 +235,74 @@
       to{ opacity:1; transform:translateY(0); }
     }
 
+    /* Modal styles */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.78);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .25s ease, visibility .25s ease;
+    }
+
+    .modal-overlay.active{
+      opacity:1;
+      visibility:visible;
+    }
+
+    .modal-content{
+      position:relative;
+      max-width:min(92vw, 720px);
+      max-height:90vh;
+      border-radius:18px;
+      border:1px solid #3a3a3a;
+      box-shadow:0 20px 60px rgba(0,0,0,.55);
+      background:#0f0f0f;
+      padding:12px;
+      transform:scale(.92);
+      transition:transform .25s ease;
+    }
+
+    .modal-overlay.active .modal-content{
+      transform:scale(1);
+    }
+
+    .modal-content img{
+      width:100%;
+      height:100%;
+      max-height:86vh;
+      object-fit:contain;
+      border-radius:14px;
+      display:block;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:10px;
+      right:12px;
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid #444;
+      background:rgba(0,0,0,.65);
+      color:#fff;
+      font-size:22px;
+      line-height:32px;
+      text-align:center;
+      cursor:pointer;
+      transition:background .2s ease, transform .2s ease;
+      user-select:none;
+    }
+
+    .modal-close:hover{
+      background:#2b2b2b;
+      transform:scale(1.05);
+    }
+
     @media (max-width: 1200px){
       .grid-3{
         grid-template-columns:1fr;
@@ -282,13 +351,15 @@
         <div class="divider"></div>
 
         <h2 class="section-title">Онлайн карта сервера</h2>
-        <p class="small-note"><a href="#" onclick="return false;" style="color:#ff4a4a;text-decoration:none;">https://your-map-link-here</a></p>
-        <img class="image map-image" src="karta.jpg" alt="karta">
+        <p class="small-note">Тыкай на изображение</p>
+        <a href="https://your-map-link-here" target="_blank" rel="noopener" style="display:block">
+          <img class="image map-image" src="karta.jpg" alt="karta">
+        </a>
       </div>
 
       <div class="col">
         <h2 class="section-title">Экономика сервера</h2>
-        <img class="image map-image" src="topi.jpg" alt="economy">
+        <img class="image map-image modal-trigger" src="topi.jpg" alt="economy">
         <div class="divider"></div>
         <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
 
@@ -330,5 +401,41 @@
       <img src="hit_ban.jpg" alt="hit_ban">
     </div>
   </div>
+
+  <!-- Modal for economy image -->
+  <div class="modal-overlay" id="economyModal">
+    <div class="modal-content">
+      <div class="modal-close" id="modalClose">&times;</div>
+      <img src="topi.jpg" alt="economy full">
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('economyModal');
+    const triggers = document.querySelectorAll('.modal-trigger');
+    const closeBtn = document.getElementById('modalClose');
+
+    function openModal(){
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    triggers.forEach(t => t.addEventListener('click', openModal));
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && modal.classList.contains('active')){
+        closeModal();
+      }
+    });
+  </script>
 </body>
 </html>
