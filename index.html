@@ -24,8 +24,8 @@
       margin:0;
       padding:0;
       background:
-        radial-gradient(circle at 50% 50%, rgba(215,0,0,.16), transparent 28%),
-        linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.75) 100%),
+        radial-gradient(circle at 50% 50%, rgba(215,0,0,.18), transparent 30%),
+        linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.88) 100%),
         url('fonchik.jpg') center/cover fixed;
       color:var(--text);
       font-family:Arial, Helvetica, sans-serif;
@@ -227,7 +227,7 @@
     .modal-overlay{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.78);
+      background:rgba(0,0,0,.82);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -347,20 +347,20 @@
 
       <div class="col">
         <h2 class="section-title">Экономика сервера</h2>
-        <img class="image map-image modal-trigger" src="topi.jpg" alt="economy">
+        <img class="image map-image modal-trigger" src="iconom.jpg" alt="economy">
         <div class="divider"></div>
-        <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
+        <p class="text">Соотношение аров к алмазу на сервере.</p>
 
         <div class="divider"></div>
 
         <h2 class="section-title">Топы по кол-ву ар</h2>
-        <img class="image map-image" src="topi.jpg" alt="topi">
+        <img class="image map-image modal-trigger-top" src="topi.jpg" alt="topi">
         <div class="divider"></div>
         <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере.</p>
       </div>
 
       <div class="col">
-        <h2 class="section-title">Участники сервера</h2>
+        <h2 class="section-title">Медиа сервера</h2>
         <div class="divider"></div>
         <div class="scroll-y">
           <div class="name-list">
@@ -389,39 +389,70 @@
   <div class="modal-overlay" id="economyModal">
     <div class="modal-content">
       <div class="modal-close" id="modalClose">&times;</div>
-      <img src="topi.jpg" alt="economy full">
+      <img src="iconom.jpg" alt="economy full">
+    </div>
+  </div>
+
+  <!-- Modal for top AR image -->
+  <div class="modal-overlay" id="topModal">
+    <div class="modal-content">
+      <div class="modal-close" id="modalCloseTop">&times;</div>
+      <img src="topi.jpg" alt="top full">
     </div>
   </div>
 
   <script>
-    const modal = document.getElementById('economyModal');
-    const triggers = document.querySelectorAll('.modal-trigger');
-    const closeBtn = document.getElementById('modalClose');
+    // Economy modal
+    const economyModal = document.getElementById('economyModal');
+    const economyTriggers = document.querySelectorAll('.modal-trigger');
+    const closeEconomy = document.getElementById('modalClose');
 
-    function openModal(){
-      modal.classList.add('active');
+    function openEconomyModal(){
+      economyModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeModal(){
-      modal.classList.remove('active');
+    function closeEconomyModal(){
+      economyModal.classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    triggers.forEach(t => t.addEventListener('click', openModal));
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) closeModal();
+    economyTriggers.forEach(t => t.addEventListener('click', openEconomyModal));
+    closeEconomy.addEventListener('click', closeEconomyModal);
+    economyModal.addEventListener('click', (e) => {
+      if(e.target === economyModal) closeEconomyModal();
     });
 
+    // Top AR modal
+    const topModal = document.getElementById('topModal');
+    const topTriggers = document.querySelectorAll('.modal-trigger-top');
+    const closeTop = document.getElementById('modalCloseTop');
+
+    function openTopModal(){
+      topModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeTopModal(){
+      topModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    topTriggers.forEach(t => t.addEventListener('click', openTopModal));
+    closeTop.addEventListener('click', closeTopModal);
+    topModal.addEventListener('click', (e) => {
+      if(e.target === topModal) closeTopModal();
+    });
+
+    // ESC key for both modals
     document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && modal.classList.contains('active')){
-        closeModal();
+      if(e.key === 'Escape'){
+        if(economyModal.classList.contains('active')) closeEconomyModal();
+        if(topModal.classList.contains('active')) closeTopModal();
       }
     });
 
     // Parallax background movement
-    const page = document.querySelector('.page');
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
