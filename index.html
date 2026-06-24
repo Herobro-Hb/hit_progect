@@ -9,14 +9,12 @@
       --panel:#111111;
       --panel2:#151515;
       --line:#2b2b2b;
-      --line2:#4a0000;
       --text:#f5f5f5;
       --muted:#b7b7b7;
       --red:#d70000;
       --red2:#ff2b2b;
       --radius:22px;
       --shadow:0 18px 48px rgba(0,0,0,.38);
-      --shadow-red:0 12px 28px rgba(215,0,0,.16);
     }
 
     *{box-sizing:border-box}
@@ -60,10 +58,6 @@
       border-left:1px solid var(--line);
     }
 
-    .col:hover{
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
-    }
-
     .head{
       display:flex;
       gap:14px;
@@ -79,12 +73,6 @@
       object-fit:cover;
       flex:0 0 auto;
       box-shadow:0 10px 20px rgba(0,0,0,.32);
-      transition:transform .3s ease, filter .3s ease;
-    }
-
-    .grid-3:hover .icon{
-      transform:scale(1.03) rotate(-1deg);
-      filter:brightness(1.05);
     }
 
     .titlebox{
@@ -207,12 +195,13 @@
     }
 
     .name{
-      padding:10px 12px;
-      border-radius:12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 10px;
+      border-radius:14px;
       border:1px solid #2f2f2f;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      text-align:center;
-      font-weight:700;
       transition:transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
@@ -220,6 +209,22 @@
       transform:translateX(2px);
       background:linear-gradient(180deg, rgba(215,0,0,.14), rgba(255,255,255,.03));
       border-color:#4a1717;
+    }
+
+    .avatar{
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.22);
+      object-fit:cover;
+      flex:0 0 auto;
+      box-shadow:0 4px 10px rgba(0,0,0,.28);
+    }
+
+    .name-text{
+      font-weight:700;
+      line-height:1.25;
+      font-size:.93rem;
     }
 
     .small-note{
@@ -233,7 +238,6 @@
       to{ opacity:1; transform:translateY(0); }
     }
 
-    /* Modal styles */
     .modal-overlay{
       position:fixed;
       inset:0;
@@ -375,21 +379,21 @@
         <div class="divider"></div>
         <div class="scroll-y">
           <div class="name-list">
-            <div class="name">Vexor</div>
-            <div class="name">MisterFox</div>
-            <div class="name">Rake</div>
-            <div class="name">Lunarix</div>
-            <div class="name">Brawler</div>
-            <div class="name">KiraPlay</div>
-            <div class="name">StormNix</div>
-            <div class="name">PixelYT</div>
-            <div class="name">NeroLive</div>
-            <div class="name">Drako</div>
-            <div class="name">Astra</div>
-            <div class="name">Hollow</div>
-            <div class="name">Rift</div>
-            <div class="name">SovaMC</div>
-            <div class="name">Frosty</div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Vexor"><span class="name-text">Vexor</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="MisterFox"><span class="name-text">MisterFox</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Rake"><span class="name-text">Rake</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Lunarix"><span class="name-text">Lunarix</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Brawler"><span class="name-text">Brawler</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="KiraPlay"><span class="name-text">KiraPlay</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="StormNix"><span class="name-text">StormNix</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="PixelYT"><span class="name-text">PixelYT</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="NeroLive"><span class="name-text">NeroLive</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Drako"><span class="name-text">Drako</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Astra"><span class="name-text">Astra</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Hollow"><span class="name-text">Hollow</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Rift"><span class="name-text">Rift</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="SovaMC"><span class="name-text">SovaMC</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Frosty"><span class="name-text">Frosty</span></div>
           </div>
         </div>
 
@@ -400,16 +404,15 @@
         </h2>
         <div class="scroll-y">
           <div class="name-list">
-            <div class="name">Herobro / Hb (Агент помощи)</div>
-            <div class="name">Nina (Тех Админ)</div>
-            <div class="name">Botsus (Тех Админ)</div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Herobro / Hb"><span class="name-text">Herobro / Hb (Агент помощи)</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Nina"><span class="name-text">Nina (Тех Админ)</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.png" alt="Botsus"><span class="name-text">Botsus (Тех Админ)</span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal for economy image -->
   <div class="modal-overlay" id="economyModal">
     <div class="modal-content">
       <div class="modal-close" id="modalClose">&times;</div>
@@ -417,7 +420,6 @@
     </div>
   </div>
 
-  <!-- Modal for top AR image -->
   <div class="modal-overlay" id="topModal">
     <div class="modal-content">
       <div class="modal-close" id="modalCloseTop">&times;</div>
@@ -426,7 +428,6 @@
   </div>
 
   <script>
-    // Economy modal
     const economyModal = document.getElementById('economyModal');
     const economyTriggers = document.querySelectorAll('.modal-trigger');
     const closeEconomy = document.getElementById('modalClose');
@@ -447,7 +448,6 @@
       if(e.target === economyModal) closeEconomyModal();
     });
 
-    // Top AR modal
     const topModal = document.getElementById('topModal');
     const topTriggers = document.querySelectorAll('.modal-trigger-top');
     const closeTop = document.getElementById('modalCloseTop');
@@ -468,7 +468,6 @@
       if(e.target === topModal) closeTopModal();
     });
 
-    // ESC key for both modals
     document.addEventListener('keydown', (e) => {
       if(e.key === 'Escape'){
         if(economyModal.classList.contains('active')) closeEconomyModal();
