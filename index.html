@@ -165,8 +165,14 @@
       border-radius:18px;
       border:1px solid #303030;
       object-fit:cover;
-      transition:transform .3s ease, filter .3s ease;
+      transition:transform .3s ease, filter .3s ease, box-shadow .3s ease;
       cursor:pointer;
+    }
+
+    .lift:hover{
+      transform:translateY(-5px);
+      box-shadow:0 14px 26px rgba(0,0,0,.28);
+      filter:brightness(1.04);
     }
 
     .map-image{
@@ -202,6 +208,12 @@
       border-color:#4a1717;
     }
 
+    .name:hover .avatar{
+      border-color:#ff8a8a;
+      box-shadow:0 0 0 2px rgba(215,0,0,.14), 0 4px 10px rgba(0,0,0,.28);
+      filter:brightness(1.05);
+    }
+
     .avatar{
       width:26px;
       height:26px;
@@ -210,6 +222,7 @@
       object-fit:cover;
       flex:0 0 auto;
       box-shadow:0 4px 10px rgba(0,0,0,.28);
+      transition:filter .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
 
     .name-text{
@@ -347,20 +360,20 @@
         <h2 class="section-title">Онлайн карта сервера</h2>
         <p class="small-note">Тыкай на изображение</p>
         <a href="https://your-map-link-here" target="_blank" rel="noopener" style="display:block">
-          <img class="image map-image" src="karta.jpg" alt="karta">
+          <img class="image map-image lift" src="karta.jpg" alt="karta">
         </a>
       </div>
 
       <div class="col">
         <h2 class="section-title">Экономика сервера</h2>
-        <img class="image map-image modal-trigger" src="iconom.jpg" alt="economy">
+        <img class="image map-image modal-trigger lift" src="iconom.jpg" alt="economy">
         <div class="divider"></div>
         <p class="text">Соотношение аров к алмазу на сервере. Статистика обновляется раз в неделю.</p>
 
         <div class="divider"></div>
 
         <h2 class="section-title">Топы по кол-ву ар</h2>
-        <img class="image map-image modal-trigger-top" src="topi.jpg" alt="topi">
+        <img class="image map-image modal-trigger-top lift" src="topi.jpg" alt="topi">
         <div class="divider"></div>
         <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере. Статистика обновляется раз в неделю.</p>
       </div>
@@ -423,41 +436,23 @@
     const economyTriggers = document.querySelectorAll('.modal-trigger');
     const closeEconomy = document.getElementById('modalClose');
 
-    function openEconomyModal(){
-      economyModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeEconomyModal(){
-      economyModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    function openEconomyModal(){ economyModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeEconomyModal(){ economyModal.classList.remove('active'); document.body.style.overflow = ''; }
 
     economyTriggers.forEach(t => t.addEventListener('click', openEconomyModal));
     closeEconomy.addEventListener('click', closeEconomyModal);
-    economyModal.addEventListener('click', (e) => {
-      if(e.target === economyModal) closeEconomyModal();
-    });
+    economyModal.addEventListener('click', (e) => { if(e.target === economyModal) closeEconomyModal(); });
 
     const topModal = document.getElementById('topModal');
     const topTriggers = document.querySelectorAll('.modal-trigger-top');
     const closeTop = document.getElementById('modalCloseTop');
 
-    function openTopModal(){
-      topModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeTopModal(){
-      topModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    function openTopModal(){ topModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeTopModal(){ topModal.classList.remove('active'); document.body.style.overflow = ''; }
 
     topTriggers.forEach(t => t.addEventListener('click', openTopModal));
     closeTop.addEventListener('click', closeTopModal);
-    topModal.addEventListener('click', (e) => {
-      if(e.target === topModal) closeTopModal();
-    });
+    topModal.addEventListener('click', (e) => { if(e.target === topModal) closeTopModal(); });
 
     document.addEventListener('keydown', (e) => {
       if(e.key === 'Escape'){
