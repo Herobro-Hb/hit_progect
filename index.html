@@ -237,6 +237,50 @@
       margin-top:10px;
     }
 
+    .wall-block{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), linear-gradient(180deg, var(--panel), #0f0f0f);
+      box-shadow:var(--shadow);
+      animation:fadeUp .7s ease both;
+    }
+
+    .wall-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+    }
+
+    .wall-item{
+      border:1px solid #2f2f2f;
+      border-radius:18px;
+      padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+
+    .wall-title{
+      margin:0 0 10px;
+      font-size:1rem;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .wall-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .wall-card{
+      padding:12px;
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(17,17,17,.95), rgba(25,25,25,.95));
+      border:1px solid #363636;
+      color:#d9d9d9;
+      min-height:58px;
+    }
+
     @keyframes fadeUp{
       from{ opacity:0; transform:translateY(14px); }
       to{ opacity:1; transform:translateY(0); }
@@ -317,6 +361,9 @@
         border-left:none;
         border-top:1px solid var(--line);
       }
+      .wall-grid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 720px){
@@ -372,10 +419,10 @@
 
         <div class="divider"></div>
 
-        <h2 class="section-title">Топы по кол-ву ар</h2>
+        <h2 class="section-title">Топ по активности на сервере</h2>
         <img class="image map-image modal-trigger-top lift" src="topi.jpg" alt="topi">
         <div class="divider"></div>
-        <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере. Статистика обновляется раз в неделю. Тыкай на изображение, чтобы посмотреть подробнее.</p>
+        <p class="text">Здесь будет отображаться топ игроков по активности на сервере. Статистика обновляется раз в неделю. Тыкай на изображение, чтобы посмотреть подробнее.</p>
       </div>
 
       <div class="col">
@@ -411,6 +458,40 @@
             <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Herobro / Hb"><span class="name-text">Herobro / Hb (Агент помощи)</span></div>
             <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Nina"><span class="name-text">Nina (Тех Админ)</span></div>
             <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Botsus"><span class="name-text">Botsus (Тех Админ)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wall-block">
+      <h2 class="section-title" style="font-size:1.15rem;">СТЕНА СЕРВЕРА</h2>
+      <div class="divider"></div>
+
+      <div class="wall-grid">
+        <div class="wall-item">
+          <h3 class="wall-title">Новости</h3>
+          <div class="wall-list">
+            <div class="wall-card">Новость 1</div>
+            <div class="wall-card">Новость 2</div>
+            <div class="wall-card">Новость 3</div>
+          </div>
+        </div>
+
+        <div class="wall-item">
+          <h3 class="wall-title">Новости</h3>
+          <div class="wall-list">
+            <div class="wall-card">Новость 4</div>
+            <div class="wall-card">Новость 5</div>
+            <div class="wall-card">Новость 6</div>
+          </div>
+        </div>
+
+        <div class="wall-item">
+          <h3 class="wall-title">Анонсы</h3>
+          <div class="wall-list">
+            <div class="wall-card">Анонс 1</div>
+            <div class="wall-card">Анонс 2</div>
+            <div class="wall-card">Анонс 3</div>
           </div>
         </div>
       </div>
