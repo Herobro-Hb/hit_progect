@@ -15,6 +15,7 @@
       --red2:#ff2b2b;
       --radius:22px;
       --shadow:0 18px 48px rgba(0,0,0,.38);
+      --glass:rgba(255,255,255,.04);
     }
 
     *{box-sizing:border-box}
@@ -245,19 +246,83 @@
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), linear-gradient(180deg, var(--panel), #0f0f0f);
       box-shadow:var(--shadow);
       animation:fadeUp .7s ease both;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .wall-block::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,43,43,.12) 25%, transparent 50%, rgba(255,43,43,.08) 75%, transparent 100%);
+      transform:translateX(-100%);
+      animation:shine 7s linear infinite;
+      pointer-events:none;
+    }
+
+    .wall-top{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .wall-logo{
+      width:74px;
+      height:74px;
+      border-radius:18px;
+      border:1px solid #444;
+      object-fit:cover;
+      box-shadow:0 10px 20px rgba(0,0,0,.32);
+      animation:pulse 3.8s ease-in-out infinite;
+    }
+
+    .wall-titlebox{
+      flex:1;
+      min-height:74px;
+      border-radius:18px;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      border:1px solid rgba(215,0,0,.35);
+      background:
+        linear-gradient(135deg, rgba(215,0,0,.24), rgba(255,255,255,.02)),
+        linear-gradient(180deg, rgba(34,34,34,.92), rgba(17,17,17,.96));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .wall-titlebox h2{
+      margin:0;
+      font-size:clamp(1.45rem, 2vw, 2rem);
+      letter-spacing:3px;
+      text-transform:uppercase;
+      text-shadow:0 0 18px rgba(215,0,0,.18);
     }
 
     .wall-grid{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
       gap:14px;
+      position:relative;
+      z-index:1;
     }
 
     .wall-item{
       border:1px solid #2f2f2f;
       border-radius:18px;
       padding:14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      backdrop-filter:blur(6px);
+      box-shadow:0 10px 26px rgba(0,0,0,.16);
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .wall-item:hover{
+      transform:translateY(-4px);
+      border-color:#5b2020;
+      box-shadow:0 16px 34px rgba(0,0,0,.24);
     }
 
     .wall-title{
@@ -269,21 +334,94 @@
 
     .wall-list{
       display:grid;
-      gap:10px;
+      gap:12px;
     }
 
     .wall-card{
       padding:12px;
-      border-radius:12px;
-      background:linear-gradient(180deg, rgba(17,17,17,.95), rgba(25,25,25,.95));
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(17,17,17,.97), rgba(25,25,25,.95));
       border:1px solid #363636;
       color:#d9d9d9;
+      box-shadow:0 8px 18px rgba(0,0,0,.16);
+      transform:translateY(0);
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .wall-card:hover{
+      transform:translateY(-2px);
+      border-color:#6a2a2a;
+      background:linear-gradient(180deg, rgba(31,18,18,.98), rgba(25,25,25,.96));
+    }
+
+    .post{
+      display:grid;
+      gap:10px;
+    }
+
+    .post img{
+      width:100%;
+      border-radius:14px;
+      border:1px solid #343434;
+      aspect-ratio: 16 / 9;
+      object-fit:cover;
+      cursor:pointer;
+      transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
+    }
+
+    .post img:hover{
+      transform:scale(1.02);
+      filter:brightness(1.06);
+      box-shadow:0 12px 26px rgba(0,0,0,.22);
+    }
+
+    .post-title{
+      font-size:.98rem;
+      font-weight:800;
+      line-height:1.35;
+      margin:0;
+    }
+
+    .post-meta{
+      font-size:.78rem;
+      color:#9f9f9f;
+      margin:0;
+    }
+
+    .post-note{
+      font-size:.68rem;
+      color:#8f8f8f;
+      margin:0;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
+
+    .announce{
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid #3a3a3a;
+      background:linear-gradient(135deg, rgba(215,0,0,.12), rgba(255,255,255,.03));
+      font-weight:700;
+      line-height:1.35;
       min-height:58px;
+      display:flex;
+      align-items:center;
+      box-shadow:0 8px 18px rgba(0,0,0,.14);
     }
 
     @keyframes fadeUp{
       from{ opacity:0; transform:translateY(14px); }
       to{ opacity:1; transform:translateY(0); }
+    }
+
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); filter:brightness(1); }
+      50%{ transform:scale(1.03); filter:brightness(1.08); }
+    }
+
+    @keyframes shine{
+      0%{ transform:translateX(-100%); }
+      100%{ transform:translateX(100%); }
     }
 
     .modal-overlay{
@@ -373,6 +511,8 @@
       .btn{ width:100%; }
       .grid-3{ border-radius:18px; }
       .col{ padding:14px; }
+      .wall-top{ flex-direction:column; align-items:stretch; }
+      .wall-logo{ width:100%; height:110px; }
     }
   </style>
 </head>
@@ -464,34 +604,66 @@
     </div>
 
     <div class="wall-block">
-      <h2 class="section-title" style="font-size:1.15rem;">СТЕНА СЕРВЕРА</h2>
-      <div class="divider"></div>
+      <div class="wall-top">
+        <img class="wall-logo" src="logo.jpg" alt="Лого сервера">
+        <div class="wall-titlebox">
+          <h2>СТЕНА СЕРВЕРА</h2>
+        </div>
+      </div>
 
       <div class="wall-grid">
         <div class="wall-item">
           <h3 class="wall-title">Новости</h3>
           <div class="wall-list">
-            <div class="wall-card">Новость 1</div>
-            <div class="wall-card">Новость 2</div>
-            <div class="wall-card">Новость 3</div>
+            <div class="wall-card post">
+              <img src="post1.jpg" alt="Пост 1" class="post-open" data-full="post1.jpg">
+              <div>
+                <p class="post-title">На сервере обновили стартовую зону: теперь новичкам проще начать путь и быстрее найти полезные точки.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
+
+            <div class="wall-card post">
+              <img src="post2.jpg" alt="Пост 2" class="post-open" data-full="post2.jpg">
+              <div>
+                <p class="post-title">Мы добавили больше RP-ориентированных деталей в мир, чтобы атмосфера стала плотнее и живее.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="wall-item">
           <h3 class="wall-title">Новости</h3>
           <div class="wall-list">
-            <div class="wall-card">Новость 4</div>
-            <div class="wall-card">Новость 5</div>
-            <div class="wall-card">Новость 6</div>
+            <div class="wall-card post">
+              <img src="post3.jpg" alt="Пост 3" class="post-open" data-full="post3.jpg">
+              <div>
+                <p class="post-title">Обновили баланс экономики и подправили награды за активность, чтобы играть стало интереснее.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
+
+            <div class="wall-card post">
+              <img src="post4.jpg" alt="Пост 4" class="post-open" data-full="post4.jpg">
+              <div>
+                <p class="post-title">Починили часть интерфейса и подготовили основу для будущих ивентов и расширения проекта.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="wall-item">
           <h3 class="wall-title">Анонсы</h3>
           <div class="wall-list">
-            <div class="wall-card">Анонс 1</div>
-            <div class="wall-card">Анонс 2</div>
-            <div class="wall-card">Анонс 3</div>
+            <div class="announce">Открытие сервера 18 июля</div>
+            <div class="announce">Ивент структуриков с 18 по 25 июля</div>
+            <div class="announce">Скоро: новая фракционная линия и дополнительные задания</div>
           </div>
         </div>
       </div>
@@ -509,6 +681,13 @@
     <div class="modal-content">
       <div class="modal-close" id="modalCloseTop">&times;</div>
       <img src="topi.jpg" alt="top full">
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="newsModal">
+    <div class="modal-content">
+      <div class="modal-close" id="closeNewsModal">&times;</div>
+      <img src="" alt="news full" id="newsModalImg">
     </div>
   </div>
 
@@ -535,10 +714,37 @@
     closeTop.addEventListener('click', closeTopModal);
     topModal.addEventListener('click', (e) => { if(e.target === topModal) closeTopModal(); });
 
+    const newsModal = document.getElementById('newsModal');
+    const newsModalImg = document.getElementById('newsModalImg');
+    const closeNewsModal = document.getElementById('closeNewsModal');
+    const postImages = document.querySelectorAll('.post-open');
+
+    function openNewsModal(src){
+      newsModalImg.src = src;
+      newsModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNews(){
+      newsModal.classList.remove('active');
+      newsModalImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    postImages.forEach(img => {
+      img.addEventListener('click', () => openNewsModal(img.dataset.full));
+    });
+
+    closeNewsModal.addEventListener('click', closeNews);
+    newsModal.addEventListener('click', (e) => {
+      if(e.target === newsModal) closeNews();
+    });
+
     document.addEventListener('keydown', (e) => {
       if(e.key === 'Escape'){
         if(economyModal.classList.contains('active')) closeEconomyModal();
         if(topModal.classList.contains('active')) closeTopModal();
+        if(newsModal.classList.contains('active')) closeNews();
       }
     });
   </script>
