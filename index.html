@@ -250,16 +250,6 @@
       overflow:hidden;
     }
 
-    .wall-block::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:linear-gradient(120deg, transparent 0%, rgba(255,43,43,.12) 25%, transparent 50%, rgba(255,43,43,.08) 75%, transparent 100%);
-      transform:translateX(-100%);
-      animation:shine 7s linear infinite;
-      pointer-events:none;
-    }
-
     .wall-top{
       display:flex;
       gap:14px;
@@ -417,11 +407,6 @@
     @keyframes pulse{
       0%,100%{ transform:scale(1); filter:brightness(1); }
       50%{ transform:scale(1.03); filter:brightness(1.08); }
-    }
-
-    @keyframes shine{
-      0%{ transform:translateX(-100%); }
-      100%{ transform:translateX(100%); }
     }
 
     .modal-overlay{
@@ -605,7 +590,7 @@
 
     <div class="wall-block">
       <div class="wall-top">
-        <img class="wall-logo" src="logo.jpg" alt="Лого сервера">
+        <img class="wall-logo" src="hitik.jpg" alt="Лого сервера">
         <div class="wall-titlebox">
           <h2>СТЕНА СЕРВЕРА</h2>
         </div>
