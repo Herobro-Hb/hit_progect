@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -146,6 +145,57 @@
 
     .map-image{
       max-height:168px;
+    }
+
+    .discord-map-btn{
+      margin-top:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      padding:14px 18px;
+      border-radius:16px;
+      text-decoration:none;
+      color:#fff;
+      font-weight:800;
+      letter-spacing:.3px;
+      text-transform:uppercase;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.14), transparent 35%),
+        linear-gradient(135deg, #1d1d1d, #2b2b2b 40%, #d70000 100%);
+      box-shadow:0 12px 28px rgba(215,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
+      position:relative;
+      overflow:hidden;
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+      animation:discordBtnPulse 4s ease-in-out infinite;
+    }
+
+    .discord-map-btn::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.18) 50%, transparent 80%);
+      transform:translateX(-120%);
+      animation:discordBtnShine 5.5s linear infinite;
+      pointer-events:none;
+    }
+
+    .discord-map-btn:hover{
+      transform:translateY(-3px) scale(1.01);
+      filter:brightness(1.06);
+      box-shadow:0 16px 34px rgba(215,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .discord-map-btn__dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:#ff4a4a;
+      box-shadow:0 0 14px rgba(255,74,74,.8);
+      position:relative;
+      z-index:1;
     }
 
     .scroll-y{
@@ -542,6 +592,16 @@
       100%{ transform:translateX(120%); }
     }
 
+    @keyframes discordBtnPulse{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-1px); }
+    }
+
+    @keyframes discordBtnShine{
+      0%{ transform:translateX(-120%); }
+      100%{ transform:translateX(120%); }
+    }
+
     .modal-overlay{
       position:fixed;
       inset:0;
@@ -638,6 +698,10 @@
       .col{ padding:14px; }
       .wall-top{ flex-direction:column; align-items:stretch; }
       .wall-logo{ width:100%; height:110px; }
+      .discord-map-btn{
+        padding:13px 16px;
+        border-radius:14px;
+      }
     }
   </style>
 </head>
@@ -708,6 +772,10 @@
         <p class="small-note">Тыкай на изображение, чтобы посмотреть подробнее</p>
         <a href="https://your-map-link-here" target="_blank" rel="noopener" style="display:block">
           <img class="image map-image lift" src="karta.jpg" alt="karta">
+        </a>
+        <a class="discord-map-btn" href="https://discord.gg/MFNuEUZW5w" target="_blank" rel="noopener">
+          <span class="discord-map-btn__dot"></span>
+          <span>Перейти в Discord сервер</span>
         </a>
       </div>
 
@@ -910,4 +978,3 @@
   </script>
 </body>
 </html>
-```
