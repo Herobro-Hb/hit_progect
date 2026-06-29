@@ -1018,10 +1018,26 @@
         <p id="applyModalText">Заполни поля ниже и отправь заявку на рассмотрение.</p>
       </div>
       <form class="apply-form">
-        <label>Никнейм<input type="text" id="applyName" placeholder="Например: Vexor" /></label>
-        <label>Discord<input type="text" id="applyDiscord" placeholder="Например: vexor#0001 или @vexor" /></label>
-        <label>О себе<textarea id="applyAbout" placeholder="Например: играю активно каждый день, умею записывать контент, люблю RP"></textarea></label>
-        <label>Почему именно ты?<textarea id="applyWhy" placeholder="Например: хочу помогать проекту, делать контент и быть активным участником"></textarea></label>
+        <label>
+          Майнкрафт никнейм
+          <input type="text" id="applyName" placeholder="Например: Vexor" />
+        </label>
+
+        <label>
+          Discord
+          <input type="text" id="applyDiscord" placeholder="Например: vexor#0001 или @vexor" />
+        </label>
+
+        <label>
+          О себе
+          <textarea id="applyAbout" placeholder="Например: играю активно каждый день, умею записывать контент, люблю RP"></textarea>
+        </label>
+
+        <label>
+          <span id="applyExtraLabel">Почему именно ты?</span>
+          <textarea id="applyWhy" placeholder="Например: хочу помогать проекту, делать контент и быть активным участником"></textarea>
+        </label>
+
         <a class="apply-send-btn" href="#" onclick="return false;">Отправить заявку</a>
       </form>
     </div>
@@ -1082,24 +1098,25 @@
     const applyModalBadge = document.getElementById('applyModalBadge');
     const applyModalTitle = document.getElementById('applyModalTitle');
     const applyModalText = document.getElementById('applyModalText');
-    const applyName = document.getElementById('applyName');
-    const applyDiscord = document.getElementById('applyDiscord');
     const applyAbout = document.getElementById('applyAbout');
     const applyWhy = document.getElementById('applyWhy');
+    const applyExtraLabel = document.getElementById('applyExtraLabel');
 
     function setApplyForm(type){
       if(type === 'yt'){
         applyModalBadge.textContent = 'Ютубер';
         applyModalTitle.textContent = 'ЗАЯВКА НА ЮТУБЕРА';
-        applyModalText.textContent = 'Расскажи о своём канале, формате роликов и опыте.';
+        applyModalText.textContent = 'Заполни заявку и приложи видео-гайд: расскажи немного о себе, покажи свой монтаж. Видео должно быть от 30 секунд.';
+        applyExtraLabel.textContent = 'Видео-гайд';
         applyAbout.placeholder = 'Например: снимаю Minecraft, RP и обзоры на серверы';
-        applyWhy.placeholder = 'Например: хочу развивать проект через видео и активность';
+        applyWhy.placeholder = 'Например: в видео расскажи о себе, покажи монтаж и вставь фрагменты своих роликов от 30 секунд';
       }
 
       if(type === 'player'){
         applyModalBadge.textContent = 'Игрок';
         applyModalTitle.textContent = 'ЗАЯВКА НА ИГРОКА';
         applyModalText.textContent = 'Заполни заявку, если хочешь попасть в проект как активный участник.';
+        applyExtraLabel.textContent = 'Почему именно ты?';
         applyAbout.placeholder = 'Например: люблю RP, играю каждый день, умею в командную игру';
         applyWhy.placeholder = 'Например: хочу участвовать в жизни сервера и развивать своего персонажа';
       }
@@ -1107,9 +1124,10 @@
       if(type === 'twitch'){
         applyModalBadge.textContent = 'Твич стример';
         applyModalTitle.textContent = 'ЗАЯВКА НА ТВИЧ СТРИМЕРА';
-        applyModalText.textContent = 'Укажи, как часто стримишь и какой контент делаешь.';
-        applyAbout.placeholder = 'Например: стримлю Minecraft, RP и общение с чатом';
-        applyWhy.placeholder = 'Например: хочу показывать сервер аудитории и делать интересный контент';
+        applyModalText.textContent = 'Укажи ссылку на Twitch-стрим и средний онлайн. Нам важно видеть стабильность и активность.';
+        applyExtraLabel.textContent = 'Ссылка на стрим и средний онлайн';
+        applyAbout.placeholder = 'Например: https://twitch.tv/yourname';
+        applyWhy.placeholder = 'Например: средний онлайн 10 человек, стримлю Minecraft и RP несколько раз в неделю';
       }
     }
 
