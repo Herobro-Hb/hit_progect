@@ -9,8 +9,6 @@
       --bg:#151515;
       --panel:#252525;
       --panel2:#1f1f1f;
-      --line:#d0d0d0;
-      --line-dark:#0f0f0f;
       --text:#f3f3f3;
       --muted:#c8c8c8;
       --yellow:#fed83d;
@@ -26,8 +24,9 @@
       min-height:100vh;
       color:var(--text);
       font-family:Arial, Helvetica, sans-serif;
+      /* Тёмный, почти равномерный фон поверх картинки */
       background:
-        linear-gradient(rgba(0,0,0,.26), rgba(0,0,0,.26)),
+        linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)),
         url('minecraft-bg.jpg') center/cover fixed;
       overflow-x:hidden;
     }
