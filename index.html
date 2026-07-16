@@ -6,21 +6,22 @@
   <title>Информация</title>
   <style>
     :root{
-      --bg:#161616;
-      --panel:#262626;
+      --bg:#151515;
+      --panel:#252525;
       --panel2:#1f1f1f;
-      --line:#d1d1d1;
+      --line:#d0d0d0;
       --line-dark:#0f0f0f;
       --text:#f3f3f3;
-      --muted:#c9c9c9;
+      --muted:#c8c8c8;
       --yellow:#fed83d;
       --orange:#f9801d;
-      --orange-dark:#c86a12;
+      --orange-dark:#a95a10;
       --black:#111111;
       --shadow:0 0 0 1px #000;
     }
 
     *{box-sizing:border-box}
+
     html,body{
       margin:0;
       padding:0;
@@ -39,16 +40,25 @@
       padding:22px;
     }
 
-    .apply-grid,
-    .grid-3,
-    .wall-grid{
+    .apply-grid{
       display:grid;
+      grid-template-columns:repeat(3, 1fr);
       gap:14px;
+      margin-bottom:18px;
     }
 
-    .apply-grid{grid-template-columns:repeat(3, 1fr); margin-bottom:18px;}
-    .grid-3{grid-template-columns:repeat(3, 1fr);}
-    .wall-grid{grid-template-columns:repeat(3, 1fr);}
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:0;
+      overflow:hidden;
+    }
+
+    .wall-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+    }
 
     .apply-card,
     .grid-3 > .col,
@@ -56,9 +66,7 @@
     .wall-item,
     .wall-card,
     .modal-content{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
-        linear-gradient(180deg, var(--panel) 0%, var(--panel2) 100%);
+      background:var(--panel);
       border:4px solid;
       border-color:var(--line) var(--line-dark) var(--line-dark) var(--line);
       box-shadow:var(--shadow);
@@ -70,17 +78,6 @@
       padding:18px;
       overflow:hidden;
       animation:appear .35s ease both;
-    }
-
-    .apply-card::before,
-    .wall-item::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(115deg, transparent 0%, rgba(254,216,61,.16) 48%, rgba(249,128,29,.12) 54%, transparent 100%);
-      transform:translateX(-120%);
-      animation:shine 6s linear infinite;
     }
 
     .apply-tag,
@@ -147,9 +144,7 @@
       display:flex;
       align-items:center;
       padding:12px 16px;
-      background:
-        linear-gradient(90deg, rgba(249,128,29,.18), rgba(254,216,61,.10)),
-        linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+      background:#2f2f2f;
       border:3px solid;
       border-color:var(--yellow) var(--black) var(--black) var(--yellow);
       border-radius:0;
@@ -174,7 +169,7 @@
 
     .divider{
       height:4px;
-      background:linear-gradient(180deg, var(--orange) 0%, var(--orange-dark) 100%);
+      background:var(--orange);
       border-top:1px solid #ffd56a;
       border-bottom:1px solid #090909;
       margin:14px 0;
@@ -182,7 +177,7 @@
 
     .col{
       padding:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      background:var(--panel2);
       position:relative;
     }
 
@@ -227,7 +222,7 @@
     }
 
     .lift:hover{
-      filter:brightness(1.04);
+      filter:none;
     }
 
     .map-image{max-height:170px;}
@@ -253,13 +248,11 @@
       font-weight:800;
       text-transform:uppercase;
       letter-spacing:.4px;
-      background:
-        linear-gradient(90deg, rgba(254,216,61,.25), rgba(249,128,29,.22)),
-        linear-gradient(180deg, var(--yellow) 0%, var(--orange) 100%);
+      background:var(--yellow);
       border:3px solid;
       border-color:#ffd86f var(--black) var(--black) #ffd86f;
-      box-shadow:0 0 0 1px #000;
-      transition:transform .18s ease, filter .18s ease;
+      box-shadow:none;
+      transition:transform .18s ease, background .18s ease;
       position:relative;
       overflow:hidden;
       border-radius:0;
@@ -267,17 +260,14 @@
 
     .apply-btn,
     .apply-send-btn{
-      color:#111;
-      background:
-        linear-gradient(90deg, rgba(255,223,117,.22), rgba(249,128,29,.18)),
-        linear-gradient(180deg, #ffd83d 0%, #f9801d 100%);
+      background:var(--orange);
+      border-color:#ffb25d var(--black) var(--black) #ffb25d;
     }
 
     .discord-map-btn:hover,
     .youtube-map-btn:hover,
     .apply-btn:hover,
     .apply-send-btn:hover{
-      filter:brightness(1.03);
       transform:translateY(-1px);
     }
 
@@ -289,9 +279,8 @@
     }
 
     .youtube-map-btn{
-      background:
-        linear-gradient(90deg, rgba(255,223,117,.22), rgba(249,128,29,.18)),
-        linear-gradient(180deg, #ffc833 0%, #f07f17 100%);
+      background:var(--orange);
+      border-color:#ffb25d var(--black) var(--black) #ffb25d;
     }
 
     .btn-dot{
@@ -342,11 +331,6 @@
       margin-top:18px;
       padding:18px;
       overflow:hidden;
-    }
-
-    .wall-card,
-    .announce{
-      border-radius:0;
     }
 
     .wall-list{
@@ -411,6 +395,7 @@
       color:#fff;
       font-weight:700;
       line-height:1.35;
+      border-radius:0;
     }
 
     .modal-overlay{
@@ -436,9 +421,7 @@
       width:min(92vw, 720px);
       max-height:90vh;
       padding:12px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
-        linear-gradient(180deg, #2a2a2a 0%, #222 100%);
+      background:var(--panel2);
       transform:scale(.98);
     }
 
@@ -466,9 +449,9 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background:linear-gradient(180deg, var(--yellow), var(--orange));
+      background:var(--orange);
       border:3px solid;
-      border-color:#ffd86f var(--black) var(--black) #ffd86f;
+      border-color:#ffb25d var(--black) var(--black) #ffb25d;
       cursor:pointer;
       font-size:22px;
       line-height:1;
@@ -555,11 +538,6 @@
     @keyframes appear{
       from{opacity:0; transform:translateY(10px)}
       to{opacity:1; transform:translateY(0)}
-    }
-
-    @keyframes shine{
-      0%{transform:translateX(-120%)}
-      100%{transform:translateX(120%)}
     }
 
     @media (max-width: 1200px){
