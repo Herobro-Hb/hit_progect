@@ -15,9 +15,7 @@
       --muted:#c8c8c8;
       --yellow:#fed83d;
       --orange:#f9801d;
-      --orange-dark:#a95a10;
       --black:#111111;
-      --shadow:0 0 0 1px #000;
     }
 
     *{box-sizing:border-box}
@@ -60,6 +58,7 @@
       gap:14px;
     }
 
+    /* Плашки без объёма: просто тёмный фон и чёрная рамка */
     .apply-card,
     .grid-3 > .col,
     .wall-block,
@@ -67,9 +66,7 @@
     .wall-card,
     .modal-content{
       background:var(--panel);
-      border:4px solid;
-      border-color:var(--line) var(--line-dark) var(--line-dark) var(--line);
-      box-shadow:var(--shadow);
+      border:4px solid var(--black);
       border-radius:0;
     }
 
@@ -102,8 +99,7 @@
       padding:8px 12px;
       margin-bottom:10px;
       background:#171717;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       color:var(--yellow);
       font-size:.8rem;
       font-weight:700;
@@ -136,6 +132,7 @@
     .icon{width:72px; height:72px;}
     .wall-logo{width:74px; height:74px;}
 
+    /* Заголовки без объёма: однотонный фон, чёрная рамка */
     .titlebox,
     .apply-titlebox,
     .wall-titlebox{
@@ -145,8 +142,7 @@
       align-items:center;
       padding:12px 16px;
       background:#2f2f2f;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       border-radius:0;
     }
 
@@ -170,8 +166,6 @@
     .divider{
       height:4px;
       background:var(--orange);
-      border-top:1px solid #ffd56a;
-      border-bottom:1px solid #090909;
       margin:14px 0;
     }
 
@@ -215,8 +209,7 @@
       width:100%;
       display:block;
       object-fit:cover;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       background:#222;
       border-radius:0;
     }
@@ -233,6 +226,7 @@
       margin-top:14px;
     }
 
+    /* Кнопки полностью плоские: один цвет фона, чёрная рамка, без объёма */
     .discord-map-btn,
     .youtube-map-btn,
     .apply-btn,
@@ -249,19 +243,14 @@
       text-transform:uppercase;
       letter-spacing:.4px;
       background:var(--yellow);
-      border:3px solid;
-      border-color:#ffd86f var(--black) var(--black) #ffd86f;
-      box-shadow:none;
+      border:3px solid var(--black);
       transition:transform .18s ease, background .18s ease;
-      position:relative;
-      overflow:hidden;
       border-radius:0;
     }
 
     .apply-btn,
     .apply-send-btn{
       background:var(--orange);
-      border-color:#ffb25d var(--black) var(--black) #ffb25d;
     }
 
     .discord-map-btn:hover,
@@ -280,7 +269,6 @@
 
     .youtube-map-btn{
       background:var(--orange);
-      border-color:#ffb25d var(--black) var(--black) #ffb25d;
     }
 
     .btn-dot{
@@ -290,7 +278,6 @@
       border:2px solid #111;
       margin-right:10px;
       flex:0 0 auto;
-      box-shadow:none;
     }
 
     .scroll-y{
@@ -310,8 +297,7 @@
       gap:10px;
       padding:8px 10px;
       background:#222;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       border-radius:0;
     }
 
@@ -343,16 +329,15 @@
       gap:10px;
       padding:12px;
       background:#202020;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
+      border-radius:0;
     }
 
     .post img{
       width:100%;
       aspect-ratio:16/9;
       object-fit:cover;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       cursor:pointer;
       border-radius:0;
     }
@@ -387,8 +372,7 @@
     .announce{
       padding:12px;
       background:#222;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       min-height:58px;
       display:flex;
       align-items:center;
@@ -435,8 +419,7 @@
       object-fit:contain;
       display:block;
       background:#222;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       border-radius:0;
     }
 
@@ -450,8 +433,7 @@
       align-items:center;
       justify-content:center;
       background:var(--orange);
-      border:3px solid;
-      border-color:#ffb25d var(--black) var(--black) #ffb25d;
+      border:3px solid var(--black);
       cursor:pointer;
       font-size:22px;
       line-height:1;
@@ -473,7 +455,7 @@
       display:inline-block;
       padding:8px 12px;
       background:#222;
-      border:2px solid var(--yellow);
+      border:2px solid var(--black);
       color:var(--yellow);
       font-size:.78rem;
       font-weight:700;
@@ -512,8 +494,7 @@
     .apply-form textarea{
       width:100%;
       border-radius:0;
-      border:3px solid;
-      border-color:var(--yellow) var(--black) var(--black) var(--yellow);
+      border:3px solid var(--black);
       background:#202020;
       color:#fff;
       padding:13px 14px;
