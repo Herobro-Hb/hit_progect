@@ -26,14 +26,10 @@
       --red:#ff4d3b;
       --red2:#ff7a5c;
       --black:#111111;
-      --glow-red: 0 0 14px rgba(255, 77, 59, .55),
-                  0 0 28px rgba(255, 77, 59, .35),
-                  0 0 42px rgba(255, 77, 59, .2);
-      --glow-red-strong: 0 0 18px rgba(255, 77, 59, .7),
-                         0 0 36px rgba(255, 77, 59, .45),
-                         0 0 54px rgba(255, 77, 59, .25);
-      --glow-yellow: 0 0 12px rgba(254, 216, 61, .45),
-                     0 0 24px rgba(254, 216, 61, .25);
+      --glow-red: 0 0 10px rgba(255, 77, 59, .35),
+                  0 0 20px rgba(255, 77, 59, .18);
+      --glow-red-strong: 0 0 12px rgba(255, 77, 59, .45),
+                         0 0 24px rgba(255, 77, 59, .22);
     }
 
     *{box-sizing:border-box}
@@ -48,7 +44,6 @@
         linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)),
         url('minecraft-bg.jpg') center/cover fixed;
       overflow-x:hidden;
-      /* Фото теперь нормальные, не пиксельные */
       image-rendering:auto;
     }
 
@@ -78,7 +73,7 @@
       gap:14px;
     }
 
-    /* Плашки: тёмный фон, чёрная рамка, красно‑оранжевое свечение */
+    /* Плашки: тёмный фон, чёрная рамка, умеренное свечение */
     .apply-card,
     .grid-3 > .col,
     .wall-block,
@@ -135,7 +130,7 @@
       text-shadow:none;
     }
 
-    /* Тег с плавным бликом и свечением */
+    /* Тег с плавным жёлтым бликом и умеренным свечением */
     .apply-tag{
       display:inline-block;
       padding:8px 12px;
@@ -163,8 +158,8 @@
         linear-gradient(
           110deg,
           transparent 30%,
-          rgba(255,255,255,.12) 40%,
-          rgba(255,255,255,.12) 44%,
+          rgba(254, 216, 61, .25) 40%,
+          rgba(254, 216, 61, .25) 44%,
           transparent 48%
         );
       transform:translateX(-100%);
@@ -191,7 +186,6 @@
       background:#222;
       object-fit:cover;
       border-radius:0;
-      /* Для мелких иконок можно оставить пиксельность (опционально) */
       image-rendering: pixelated;
     }
 
@@ -199,7 +193,7 @@
     .icon{width:72px; height:72px;}
     .wall-logo{width:74px; height:74px;}
 
-    /* Заголовки с красно‑оранжевым свечением и плавным бликом */
+    /* Заголовки с жёлтым бликом и умеренным свечением */
     .titlebox,
     .apply-titlebox,
     .wall-titlebox{
@@ -232,8 +226,8 @@
         linear-gradient(
           120deg,
           transparent 35%,
-          rgba(255,255,255,.1) 45%,
-          rgba(255,255,255,.1) 49%,
+          rgba(254, 216, 61, .18) 45%,
+          rgba(254, 216, 61, .18) 49%,
           transparent 55%
         );
       transform:translateX(-100%);
@@ -278,8 +272,8 @@
         linear-gradient(
           90deg,
           transparent 55%,
-          rgba(255,255,255,.22) 65%,
-          rgba(255,255,255,.22) 68%,
+          rgba(254, 216, 61, .35) 65%,
+          rgba(254, 216, 61, .35) 68%,
           transparent 72%
         );
       transform:translateX(-100%);
@@ -329,7 +323,6 @@
       border:3px solid var(--black);
       background:#222;
       border-radius:0;
-      /* Фото не пиксельные */
       image-rendering: auto;
       transition:filter .28s ease, transform .28s ease, box-shadow .28s ease;
       box-shadow:
@@ -355,7 +348,7 @@
       margin-top:14px;
     }
 
-    /* Кнопки: красно‑оранжевое свечение, плавное всплывание, мягкие тени */
+    /* Кнопки: умеренное свечение, жёлтые переливания */
     .discord-map-btn,
     .youtube-map-btn,
     .apply-btn,
@@ -425,7 +418,7 @@
         var(--glow-red-strong);
     }
 
-    /* Плавный шиммер на кнопках */
+    /* Жёлтый плавный шиммер на кнопках */
     .apply-btn::before,
     .apply-send-btn::before,
     .discord-map-btn::before,
@@ -437,8 +430,8 @@
         linear-gradient(
           110deg,
           transparent 30%,
-          rgba(255,255,255,.16) 45%,
-          rgba(255,255,255,.16) 50%,
+          rgba(254, 216, 61, .28) 45%,
+          rgba(254, 216, 61, .28) 50%,
           transparent 58%
         );
       transform:translateX(-100%);
@@ -562,7 +555,6 @@
       border:3px solid var(--black);
       cursor:pointer;
       border-radius:0;
-      /* Фото не пиксельные */
       image-rendering: auto;
       transition:
         filter .28s ease,
@@ -645,8 +637,8 @@
         linear-gradient(
           100deg,
           transparent 35%,
-          rgba(255,255,255,.1) 48%,
-          rgba(255,255,255,.1) 52%,
+          rgba(254, 216, 61, .18) 48%,
+          rgba(254, 216, 61, .18) 52%,
           transparent 60%
         );
       transform:translateX(-100%);
@@ -853,7 +845,8 @@
       .head,
       .apply-top,
       .wall-top{
-        flex-direction:colon-position-items:stretch;
+        flex-direction:column;
+        align-items:stretch;
       }
       .icon,
       .apply-icon,
