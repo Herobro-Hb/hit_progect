@@ -23,11 +23,17 @@
       --yellow2:#ffd56a;
       --orange:#f9801d;
       --orange2:#ffb25d;
+      --red:#ff4d3b;
+      --red2:#ff7a5c;
       --black:#111111;
+      --glow-red: 0 0 14px rgba(255, 77, 59, .55),
+                  0 0 28px rgba(255, 77, 59, .35),
+                  0 0 42px rgba(255, 77, 59, .2);
+      --glow-red-strong: 0 0 18px rgba(255, 77, 59, .7),
+                         0 0 36px rgba(255, 77, 59, .45),
+                         0 0 54px rgba(255, 77, 59, .25);
       --glow-yellow: 0 0 12px rgba(254, 216, 61, .45),
                      0 0 24px rgba(254, 216, 61, .25);
-      --glow-orange: 0 0 12px rgba(249, 128, 29, .45),
-                     0 0 24px rgba(249, 128, 29, .25);
     }
 
     *{box-sizing:border-box}
@@ -42,7 +48,8 @@
         linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)),
         url('minecraft-bg.jpg') center/cover fixed;
       overflow-x:hidden;
-      image-rendering:pixelated;
+      /* Фото теперь нормальные, не пиксельные */
+      image-rendering:auto;
     }
 
     .page{
@@ -71,7 +78,7 @@
       gap:14px;
     }
 
-    /* Плашки: тёмный фон, чёрная рамка, лёгкое свечение */
+    /* Плашки: тёмный фон, чёрная рамка, красно‑оранжевое свечение */
     .apply-card,
     .grid-3 > .col,
     .wall-block,
@@ -84,7 +91,8 @@
       position:relative;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 6px 18px rgba(0,0,0,.55);
+        0 6px 18px rgba(0,0,0,.55),
+        var(--glow-red);
       transition:
         transform .28s ease,
         box-shadow .28s ease,
@@ -106,7 +114,8 @@
       transform:translateY(-2px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
-        0 10px 26px rgba(0,0,0,.65);
+        0 10px 26px rgba(0,0,0,.65),
+        var(--glow-red-strong);
     }
 
     .apply-tag,
@@ -126,7 +135,7 @@
       text-shadow:none;
     }
 
-    /* Пиксельный тег с плавным бликом */
+    /* Тег с плавным бликом и свечением */
     .apply-tag{
       display:inline-block;
       padding:8px 12px;
@@ -142,7 +151,8 @@
       overflow:hidden;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.55),
-        0 4px 14px rgba(0,0,0,.45);
+        0 4px 14px rgba(0,0,0,.45),
+        var(--glow-red);
     }
 
     .apply-tag::before{
@@ -181,14 +191,15 @@
       background:#222;
       object-fit:cover;
       border-radius:0;
-      image-rendering:pixelated;
+      /* Для мелких иконок можно оставить пиксельность (опционально) */
+      image-rendering: pixelated;
     }
 
     .apply-icon{width:78px; height:78px;}
     .icon{width:72px; height:72px;}
     .wall-logo{width:74px; height:74px;}
 
-    /* Заголовки с более богатым свечением и плавным бликом */
+    /* Заголовки с красно‑оранжевым свечением и плавным бликом */
     .titlebox,
     .apply-titlebox,
     .wall-titlebox{
@@ -204,7 +215,8 @@
       overflow:hidden;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 6px 18px rgba(0,0,0,.55);
+        0 6px 18px rgba(0,0,0,.55),
+        var(--glow-red);
     }
 
     .apply-titlebox{min-height:78px}
@@ -254,7 +266,8 @@
       border:1px solid rgba(0,0,0,.55);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.45),
-        0 2px 8px rgba(0,0,0,.45);
+        0 2px 8px rgba(0,0,0,.45),
+        var(--glow-red);
     }
 
     .divider::after{
@@ -316,11 +329,13 @@
       border:3px solid var(--black);
       background:#222;
       border-radius:0;
-      image-rendering:pixelated;
+      /* Фото не пиксельные */
+      image-rendering: auto;
       transition:filter .28s ease, transform .28s ease, box-shadow .28s ease;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 6px 16px rgba(0,0,0,.55);
+        0 6px 16px rgba(0,0,0,.55),
+        var(--glow-red);
     }
 
     .image:hover{
@@ -328,7 +343,8 @@
       transform:translateY(-2px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
-        0 10px 24px rgba(0,0,0,.65);
+        0 10px 24px rgba(0,0,0,.65),
+        var(--glow-red-strong);
     }
 
     .map-image{max-height:170px;}
@@ -339,7 +355,7 @@
       margin-top:14px;
     }
 
-    /* Кнопки: богатое свечение, плавное всплывание, мягкие тени */
+    /* Кнопки: красно‑оранжевое свечение, плавное всплывание, мягкие тени */
     .discord-map-btn,
     .youtube-map-btn,
     .apply-btn,
@@ -365,10 +381,11 @@
         background .28s ease,
         filter .28s ease,
         box-shadow .28s ease;
-      image-rendering:pixelated;
+      image-rendering: auto;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 6px 16px rgba(0,0,0,.55);
+        0 6px 16px rgba(0,0,0,.55),
+        var(--glow-red);
     }
 
     .apply-btn,
@@ -377,7 +394,7 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
         0 6px 16px rgba(0,0,0,.55),
-        var(--glow-orange);
+        var(--glow-red-strong);
     }
 
     .discord-map-btn,
@@ -385,7 +402,7 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
         0 6px 16px rgba(0,0,0,.55),
-        var(--glow-yellow);
+        var(--glow-red);
     }
 
     .discord-map-btn:hover,
@@ -397,7 +414,7 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
         0 10px 24px rgba(0,0,0,.65),
-        var(--glow-yellow);
+        var(--glow-red-strong);
     }
 
     .apply-btn:hover,
@@ -405,7 +422,7 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
         0 10px 24px rgba(0,0,0,.65),
-        var(--glow-orange);
+        var(--glow-red-strong);
     }
 
     /* Плавный шиммер на кнопках */
@@ -474,7 +491,8 @@
         box-shadow .28s ease;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.55),
-        0 4px 12px rgba(0,0,0,.45);
+        0 4px 12px rgba(0,0,0,.45),
+        var(--glow-red);
     }
 
     .name:hover{
@@ -482,7 +500,8 @@
       transform:translateY(-1px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 8px 18px rgba(0,0,0,.55);
+        0 8px 18px rgba(0,0,0,.55),
+        var(--glow-red-strong);
     }
 
     .avatar{
@@ -522,7 +541,8 @@
         box-shadow .28s ease;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 6px 16px rgba(0,0,0,.55);
+        0 6px 16px rgba(0,0,0,.55),
+        var(--glow-red);
     }
 
     .post:hover{
@@ -531,7 +551,8 @@
       transform:translateY(-2px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
-        0 10px 24px rgba(0,0,0,.65);
+        0 10px 24px rgba(0,0,0,.65),
+        var(--glow-red-strong);
     }
 
     .post img{
@@ -541,14 +562,16 @@
       border:3px solid var(--black);
       cursor:pointer;
       border-radius:0;
-      image-rendering:pixelated;
+      /* Фото не пиксельные */
+      image-rendering: auto;
       transition:
         filter .28s ease,
         transform .28s ease,
         box-shadow .28s ease;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 4px 12px rgba(0,0,0,.45);
+        0 4px 12px rgba(0,0,0,.45),
+        var(--glow-red);
     }
 
     .post img:hover{
@@ -556,7 +579,8 @@
       transform:translateY(-2px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
-        0 8px 18px rgba(0,0,0,.55);
+        0 8px 18px rgba(0,0,0,.55),
+        var(--glow-red-strong);
     }
 
     .post-title{
@@ -601,14 +625,16 @@
       overflow:hidden;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 6px 16px rgba(0,0,0,.55);
+        0 6px 16px rgba(0,0,0,.55),
+        var(--glow-red);
     }
 
     .announce:hover{
       transform:translateY(-2px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
-        0 10px 24px rgba(0,0,0,.65);
+        0 10px 24px rgba(0,0,0,.65),
+        var(--glow-red-strong);
     }
 
     .announce::before{
@@ -656,7 +682,8 @@
       transition:transform .35s ease, box-shadow .35s ease;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
-        0 12px 32px rgba(0,0,0,.7);
+        0 12px 32px rgba(0,0,0,.7),
+        var(--glow-red-strong);
     }
 
     .modal-overlay.active .modal-content{
@@ -671,7 +698,7 @@
       background:#222;
       border:3px solid var(--black);
       border-radius:0;
-      image-rendering:pixelated;
+      image-rendering: auto;
     }
 
     .modal-close{
@@ -698,7 +725,7 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
         0 6px 16px rgba(0,0,0,.55),
-        var(--glow-orange);
+        var(--glow-red-strong);
     }
 
     .modal-close:hover{
@@ -707,7 +734,7 @@
       box-shadow:
         0 0 0 1px rgba(0,0,0,.75),
         0 10px 24px rgba(0,0,0,.65),
-        var(--glow-orange);
+        var(--glow-red-strong);
     }
 
     .apply-modal{
@@ -732,7 +759,8 @@
       letter-spacing:.4px;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.55),
-        0 4px 12px rgba(0,0,0,.45);
+        0 4px 12px rgba(0,0,0,.45),
+        var(--glow-red);
     }
 
     .apply-modal h2{
@@ -779,7 +807,8 @@
         transform .28s ease;
       box-shadow:
         0 0 0 1px rgba(0,0,0,.55),
-        0 4px 12px rgba(0,0,0,.45);
+        0 4px 12px rgba(0,0,0,.45),
+        var(--glow-red);
     }
 
     .apply-form textarea{min-height:110px;}
@@ -795,7 +824,8 @@
       transform:translateY(-1px);
       box-shadow:
         0 0 0 1px rgba(0,0,0,.65),
-        0 8px 18px rgba(0,0,0,.55);
+        0 8px 18px rgba(0,0,0,.55),
+        var(--glow-red-strong);
     }
 
     @keyframes appear{
@@ -823,8 +853,7 @@
       .head,
       .apply-top,
       .wall-top{
-        flex-direction:column;
-        align-items:stretch;
+        flex-direction:colon-position-items:stretch;
       }
       .icon,
       .apply-icon,
