@@ -147,7 +147,8 @@
       max-height:168px;
     }
 
-    .discord-map-btn{
+    .discord-map-btn,
+    .youtube-map-btn{
       margin-top:14px;
       display:flex;
       align-items:center;
@@ -172,7 +173,15 @@
       animation:discordBtnPulse 4s ease-in-out infinite;
     }
 
-    .discord-map-btn::before{
+    .youtube-map-btn{
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.14), transparent 35%),
+        linear-gradient(135deg, #1d1d1d, #2b2b2b 40%, #cc0000 100%);
+      box-shadow:0 12px 28px rgba(204,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .discord-map-btn::before,
+    .youtube-map-btn::before{
       content:"";
       position:absolute;
       inset:-2px;
@@ -182,7 +191,8 @@
       pointer-events:none;
     }
 
-    .discord-map-btn:hover{
+    .discord-map-btn:hover,
+    .youtube-map-btn:hover{
       transform:translateY(-3px) scale(1.01);
       filter:brightness(1.06);
       box-shadow:0 16px 34px rgba(215,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
@@ -196,6 +206,22 @@
       box-shadow:0 0 14px rgba(255,74,74,.8);
       position:relative;
       z-index:1;
+    }
+
+    .youtube-map-btn__dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:#ff3b3b;
+      box-shadow:0 0 14px rgba(255,59,59,.8);
+      position:relative;
+      z-index:1;
+    }
+
+    .button-stack{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
     }
 
     .scroll-y{
@@ -799,7 +825,8 @@
       .col{ padding:14px; }
       .wall-top{ flex-direction:column; align-items:stretch; }
       .wall-logo{ width:100%; height:110px; }
-      .discord-map-btn{
+      .discord-map-btn,
+      .youtube-map-btn{
         padding:13px 16px;
         border-radius:14px;
       }
@@ -874,10 +901,17 @@
         <a href="https://your-map-link-here" target="_blank" rel="noopener" style="display:block">
           <img class="image map-image lift" src="karta.jpg" alt="karta">
         </a>
-        <a class="discord-map-btn" href="https://discord.gg/MFNuEUZW5w" target="_blank" rel="noopener">
-          <span class="discord-map-btn__dot"></span>
-          <span>Перейти в Discord сервер</span>
-        </a>
+
+        <div class="button-stack">
+          <a class="discord-map-btn" href="#" onclick="return false;">
+            <span class="discord-map-btn__dot"></span>
+            <span>Discord сервер</span>
+          </a>
+          <a class="youtube-map-btn" href="https://www.youtube.com/" target="_blank" rel="noopener">
+            <span class="youtube-map-btn__dot"></span>
+            <span>YouTube канал сервера</span>
+          </a>
+        </div>
       </div>
 
       <div class="col">
