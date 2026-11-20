@@ -6,336 +6,189 @@
   <title>Информация</title>
   <style>
     :root{
-      --bg:#1b1b1b;
-      --bg2:#232323;
-      --panel:#2f2f2f;
-      --panel2:#262626;
-      --line:#8b8b8b;
-      --line-dark:#1a1a1a;
-      --text:#f2f2f2;
-      --muted:#c8c8c8;
-      --accent:#f9801d;
-      --accent2:#fed83d;
-      --accent3:#d9a11e;
-      --shadow:0 0 0 1px #000, inset 0 1px 0 rgba(255,255,255,.06);
+      --panel:#111111;
+      --panel2:#151515;
+      --line:#2b2b2b;
+      --line2:#4a0000;
+      --text:#f5f5f5;
+      --muted:#b7b7b7;
+      --red:#d70000;
+      --red2:#ff2b2b;
+      --radius:22px;
+      --shadow:0 18px 48px rgba(0,0,0,.38);
+      --shadow-red:0 12px 28px rgba(215,0,0,.16);
     }
 
-    *{ box-sizing:border-box; }
-
+    *{box-sizing:border-box}
     html,body{
       margin:0;
       padding:0;
-      min-height:100vh;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(215,0,0,.16), transparent 28%),
+        linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.75) 100%),
+        url('fonchik.jpg') center/cover fixed;
       color:var(--text);
       font-family:Arial, Helvetica, sans-serif;
-      background:
-        linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.28)),
-        url('minecraft-bg.jpg') center/cover fixed;
       overflow-x:hidden;
-    }
-
-    body{
-      image-rendering:auto;
+      min-height:100vh;
     }
 
     .page{
-      width:min(100%, 1680px);
+      width:min(100%, 1720px);
       margin:0 auto;
       padding:22px;
     }
 
-    .apply-grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:14px;
-      margin-bottom:18px;
-    }
-
     .grid-3{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr 1fr;
       gap:0;
-      overflow:hidden;
-      margin-top:0;
-    }
-
-    .apply-card,
-    .grid-3,
-    .wall-block,
-    .modal-content{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
-        linear-gradient(180deg, var(--panel) 0%, var(--panel2) 100%);
-      border:4px solid;
-      border-color:#9b9b9b #1a1a1a #1a1a1a #9b9b9b;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), linear-gradient(180deg, var(--panel), #0f0f0f);
       box-shadow:var(--shadow);
-    }
-
-    .apply-card{
-      position:relative;
-      padding:18px;
       overflow:hidden;
-      animation:appear .35s ease both;
+      animation:fadeUp .6s ease both;
     }
 
-    .apply-card::before,
-    .wall-item::before,
-    .grid-box::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.05) 45%, rgba(255,255,255,.02) 55%, transparent 100%);
-      transform:translateX(-120%);
-      animation:shine 6s linear infinite;
+    .col{
+      padding:18px;
+      position:relative;
     }
 
-    .apply-card:nth-child(1){animation-delay:.03s}
-    .apply-card:nth-child(2){animation-delay:.08s}
-    .apply-card:nth-child(3){animation-delay:.13s}
-
-    .apply-tag,
-    .section-title,
-    .wall-title,
-    .post-title,
-    .post-meta,
-    .post-note,
-    .text,
-    .small-note,
-    .name-text,
-    .announce,
-    .apply-modal h2,
-    .apply-modal p,
-    .apply-modal-badge,
-    .apply-form label{
-      text-shadow:1px 1px 0 rgba(0,0,0,.55);
+    .col + .col{
+      border-left:1px solid var(--line);
     }
 
-    .apply-tag{
-      display:inline-block;
-      padding:8px 12px;
-      margin-bottom:10px;
-      background:#2a2a2a;
-      border:3px solid;
-      border-color:#d9d9d9 #1a1a1a #1a1a1a #d9d9d9;
-      color:#fff;
-      font-size:.8rem;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.4px;
+    .col:hover{
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
     }
 
-    .apply-top{
+    .head{
       display:flex;
       gap:14px;
       align-items:center;
       margin-bottom:14px;
-      position:relative;
-      z-index:1;
-    }
-
-    .apply-icon,
-    .icon,
-    .wall-logo,
-    .avatar{
-      border:2px solid #1a1a1a;
-      background:#222;
-      object-fit:cover;
-      border-radius:0;
-    }
-
-    .apply-icon{
-      width:78px;
-      height:78px;
     }
 
     .icon{
       width:72px;
       height:72px;
+      border-radius:18px;
+      border:1px solid #444;
+      object-fit:cover;
+      flex:0 0 auto;
+      box-shadow:0 10px 20px rgba(0,0,0,.32);
+      transition:transform .3s ease, filter .3s ease;
     }
 
-    .wall-logo{
-      width:74px;
-      height:74px;
+    .grid-3:hover .icon{
+      transform:scale(1.03) rotate(-1deg);
+      filter:brightness(1.05);
     }
 
-    .titlebox,
-    .apply-titlebox,
-    .wall-titlebox{
+    .titlebox{
       flex:1;
       min-height:72px;
+      border-radius:18px;
+      padding:12px 18px;
       display:flex;
       align-items:center;
-      padding:12px 16px;
+      border:1px solid rgba(215,0,0,.35);
       background:
-        linear-gradient(180deg, #4b4b4b 0%, #3a3a3a 100%);
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-    }
-
-    .apply-titlebox{min-height:78px}
-    .wall-titlebox{min-height:74px}
-
-    .titlebox h1,
-    .apply-titlebox h2,
-    .wall-titlebox h2{
-      margin:0;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      font-weight:800;
-      line-height:1.08;
+        linear-gradient(135deg, rgba(215,0,0,.26), rgba(255,255,255,.02)),
+        linear-gradient(180deg, rgba(34,34,34,.9), rgba(17,17,17,.95));
     }
 
     .titlebox h1{
-      font-size:clamp(1.55rem, 2.1vw, 2.2rem);
-    }
-
-    .apply-titlebox h2{
-      font-size:clamp(1.15rem, 1.7vw, 1.6rem);
-    }
-
-    .wall-titlebox h2{
-      font-size:clamp(1.35rem, 1.9vw, 1.85rem);
-    }
-
-    .divider{
-      height:4px;
-      background:linear-gradient(180deg, #7f7f7f 0%, #505050 100%);
-      border-top:1px solid #aaaaaa;
-      border-bottom:1px solid #111;
-      margin:14px 0;
-    }
-
-    .col{
-      padding:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      position:relative;
-    }
-
-    .col + .col{
-      border-left:4px solid #1a1a1a;
+      margin:0;
+      font-size:clamp(1.6rem, 2.2vw, 2.35rem);
+      letter-spacing:2.8px;
+      text-transform:uppercase;
+      text-shadow:0 0 16px rgba(215,0,0,.15);
     }
 
     .section-title{
       margin:0 0 10px;
-      font-size:1rem;
       text-transform:uppercase;
-      color:#fff;
-      letter-spacing:.4px;
+      letter-spacing:.7px;
+      font-size:1.02rem;
     }
 
-    .section-title a{
-      color:var(--accent2);
-      text-decoration:none;
-    }
-
-    .section-title a:hover{
-      text-decoration:underline;
-    }
-
-    .text,
-    .small-note,
-    .apply-text{
-      color:var(--muted);
-      line-height:1.55;
-      font-size:.95rem;
+    .text{
       margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.95rem;
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      margin:14px 0;
+    }
+
+    .tiny-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 16px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#fff;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(135deg, var(--red), var(--red2));
+      box-shadow:0 10px 24px rgba(215,0,0,.18);
+      transition:transform .22s ease, filter .22s ease, box-shadow .22s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      filter:saturate(1.08) brightness(1.05);
+      box-shadow:0 14px 30px rgba(215,0,0,.26);
+    }
+
+    .btn.secondary{
+      background:linear-gradient(135deg, #1a1a1a, #2b2b2b);
+      box-shadow:none;
+      border-color:#333;
+    }
+
+    .btn.secondary:hover{
+      box-shadow:0 12px 22px rgba(0,0,0,.25);
     }
 
     .image{
       width:100%;
       display:block;
+      border-radius:18px;
+      border:1px solid #303030;
       object-fit:cover;
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      background:#222;
-      border-radius:0;
+      transition:transform .3s ease, filter .3s ease;
+      cursor:pointer;
     }
 
-    .lift:hover{
-      filter:brightness(1.06);
+    .image:hover{
+      transform:scale(1.01);
+      filter:brightness(1.03);
     }
 
     .map-image{
-      max-height:170px;
-    }
-
-    .button-stack{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .discord-map-btn,
-    .youtube-map-btn,
-    .apply-btn,
-    .apply-send-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      min-height:44px;
-      padding:12px 16px;
-      text-decoration:none;
-      color:#fff;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.4px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)),
-        linear-gradient(180deg, #4a4a4a 0%, #373737 100%);
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      box-shadow:var(--shadow);
-      transition:filter .2s ease, transform .2s ease, border-color .2s ease;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .apply-btn,
-    .apply-send-btn{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0)),
-        linear-gradient(180deg, #a35e12 0%, #7d4710 100%);
-      border-color:#ffe08a #1a1a1a #1a1a1a #ffe08a;
-    }
-
-    .discord-map-btn:hover,
-    .youtube-map-btn:hover,
-    .apply-btn:hover,
-    .apply-send-btn:hover{
-      filter:brightness(1.08);
-      transform:translateY(-1px);
-    }
-
-    .discord-map-btn{
-      cursor:default;
-      pointer-events:none;
-      user-select:none;
-      opacity:.95;
-    }
-
-    .youtube-map-btn{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,0)),
-        linear-gradient(180deg, #8a6a12 0%, #5f4a0d 100%);
-      border-color:#ffe08a #1a1a1a #1a1a1a #ffe08a;
-    }
-
-    .btn-dot{
-      width:10px;
-      height:10px;
-      background:var(--accent2);
-      border:2px solid #1a1a1a;
-      margin-right:10px;
-      flex:0 0 auto;
-      box-shadow:0 0 0 1px rgba(0,0,0,.35);
+      max-height:168px;
     }
 
     .scroll-y{
-      max-height:210px;
+      max-height:280px;
       overflow-y:auto;
       padding-right:6px;
+      scrollbar-color:#ff2b2b #1a1a1a;
     }
 
     .name-list{
@@ -344,135 +197,44 @@
     }
 
     .name{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 10px;
-      background:#2c2c2c;
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-    }
-
-    .avatar{
-      width:26px;
-      height:26px;
-      flex:0 0 auto;
-    }
-
-    .name-text{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid #2f2f2f;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      text-align:center;
       font-weight:700;
-      font-size:.92rem;
-      line-height:1.25;
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
-    .wall-block{
-      margin-top:18px;
-      padding:18px;
-      overflow:hidden;
+    .name:hover{
+      transform:translateX(2px);
+      background:linear-gradient(180deg, rgba(215,0,0,.14), rgba(255,255,255,.03));
+      border-color:#4a1717;
     }
 
-    .wall-top{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      margin-bottom:16px;
+    .small-note{
+      color:#ddd;
+      font-size:.9rem;
+      margin-top:10px;
     }
 
-    .wall-grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:14px;
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(14px); }
+      to{ opacity:1; transform:translateY(0); }
     }
 
-    .wall-item{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
-        linear-gradient(180deg, #343434 0%, #282828 100%);
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      padding:14px;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .wall-list{
-      display:grid;
-      gap:12px;
-    }
-
-    .wall-card{
-      padding:12px;
-      background:#262626;
-      border:3px solid;
-      border-color:#cfcfcf #1a1a1a #1a1a1a #cfcfcf;
-    }
-
-    .post{
-      display:grid;
-      gap:10px;
-    }
-
-    .post img{
-      width:100%;
-      aspect-ratio:16/9;
-      object-fit:cover;
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      cursor:pointer;
-      border-radius:0;
-    }
-
-    .post-title{
-      font-size:.95rem;
-      font-weight:800;
-      line-height:1.35;
-      margin:0;
-      color:#fff;
-    }
-
-    .post-meta{
-      font-size:.77rem;
-      color:#d0d0d0;
-      margin:0;
-    }
-
-    .post-meta a{
-      color:var(--accent2);
-      text-decoration:none;
-      font-weight:700;
-    }
-
-    .post-note{
-      font-size:.67rem;
-      color:#bdbdbd;
-      margin:0;
-      line-height:1.2;
-    }
-
-    .announce{
-      padding:12px;
-      background:#2a2a2a;
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      min-height:58px;
-      display:flex;
-      align-items:center;
-      color:#fff;
-      font-weight:700;
-      line-height:1.35;
-    }
-
+    /* Modal styles */
     .modal-overlay{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.82);
+      background:rgba(0,0,0,.78);
       display:flex;
       align-items:center;
       justify-content:center;
       z-index:9999;
       opacity:0;
       visibility:hidden;
-      transition:opacity .2s ease, visibility .2s ease;
+      transition:opacity .25s ease, visibility .25s ease;
     }
 
     .modal-overlay.active{
@@ -482,16 +244,15 @@
 
     .modal-content{
       position:relative;
-      width:min(92vw, 720px);
+      max-width:min(92vw, 720px);
       max-height:90vh;
+      border-radius:18px;
+      border:1px solid #3a3a3a;
+      box-shadow:0 20px 60px rgba(0,0,0,.55);
+      background:#0f0f0f;
       padding:12px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
-        linear-gradient(180deg, #343434 0%, #2b2b2b 100%);
-      border:4px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      box-shadow:var(--shadow);
-      transform:scale(.98);
+      transform:scale(.92);
+      transition:transform .25s ease;
     }
 
     .modal-overlay.active .modal-content{
@@ -500,204 +261,58 @@
 
     .modal-content img{
       width:100%;
+      height:100%;
       max-height:86vh;
       object-fit:contain;
+      border-radius:14px;
       display:block;
-      background:#222;
-      border:3px solid;
-      border-color:#cfcfcf #1a1a1a #1a1a1a #cfcfcf;
-      border-radius:0;
     }
 
     .modal-close{
       position:absolute;
       top:10px;
-      right:10px;
+      right:12px;
       width:34px;
       height:34px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#666;
-      border:3px solid;
-      border-color:#e0e0e0 #1a1a1a #1a1a1a #e0e0e0;
-      cursor:pointer;
-      font-size:22px;
-      line-height:1;
+      border-radius:10px;
+      border:1px solid #444;
+      background:rgba(0,0,0,.65);
       color:#fff;
+      font-size:22px;
+      line-height:32px;
+      text-align:center;
+      cursor:pointer;
+      transition:background .2s ease, transform .2s ease;
       user-select:none;
     }
 
-    .apply-modal{
-      width:min(92vw, 720px);
-      padding:18px;
-    }
-
-    .apply-modal-head{
-      margin-bottom:16px;
-    }
-
-    .apply-modal-badge{
-      display:inline-block;
-      padding:8px 12px;
-      background:#2a2a2a;
-      border:2px solid #d0d0d0;
-      color:#fff;
-      font-size:.78rem;
-      font-weight:700;
-      margin-bottom:10px;
-      text-transform:uppercase;
-      letter-spacing:.4px;
-    }
-
-    .apply-modal h2{
-      margin:0;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      font-size:clamp(1.35rem, 2vw, 1.9rem);
-    }
-
-    .apply-modal p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.5;
-    }
-
-    .apply-form{
-      display:grid;
-      gap:12px;
-    }
-
-    .apply-form label{
-      display:grid;
-      gap:7px;
-      color:#fff;
-      font-weight:700;
-      font-size:.92rem;
-    }
-
-    .apply-form input,
-    .apply-form textarea{
-      width:100%;
-      border-radius:0;
-      border:3px solid;
-      border-color:#d0d0d0 #1a1a1a #1a1a1a #d0d0d0;
-      background:#262626;
-      color:#fff;
-      padding:13px 14px;
-      outline:none;
-      font-family:inherit;
-      font-size:.95rem;
-      resize:vertical;
-    }
-
-    .apply-form textarea{
-      min-height:110px;
-    }
-
-    .apply-form input::placeholder,
-    .apply-form textarea::placeholder{
-      color:#b0b0b0;
-    }
-
-    .apply-form input:focus,
-    .apply-form textarea:focus{
-      background:#2d2d2d;
-      border-color:#ffe08a #1a1a1a #1a1a1a #ffe08a;
-    }
-
-    @keyframes appear{
-      from{opacity:0; transform:translateY(10px)}
-      to{opacity:1; transform:translateY(0)}
-    }
-
-    @keyframes shine{
-      0%{transform:translateX(-120%)}
-      100%{transform:translateX(120%)}
+    .modal-close:hover{
+      background:#2b2b2b;
+      transform:scale(1.05);
     }
 
     @media (max-width: 1200px){
-      .apply-grid,
-      .grid-3,
-      .wall-grid{
+      .grid-3{
         grid-template-columns:1fr;
       }
       .col + .col{
         border-left:none;
-        border-top:4px solid #1a1a1a;
+        border-top:1px solid var(--line);
       }
     }
 
     @media (max-width: 720px){
-      .page{padding:12px}
-      .head,
-      .apply-top,
-      .wall-top{
-        flex-direction:column;
-        align-items:stretch;
-      }
-      .icon,
-      .apply-icon,
-      .wall-logo{
-        width:100%;
-        height:110px;
-      }
-      .titlebox,
-      .apply-titlebox,
-      .wall-titlebox{
-        min-height:auto;
-      }
-      .col{padding:14px}
-      .button-stack{
-        gap:8px;
-      }
+      .page{ padding:14px; }
+      .head{ flex-direction:column; align-items:stretch; }
+      .icon{ width:100%; height:110px; }
+      .btn{ width:100%; }
+      .grid-3{ border-radius:18px; }
+      .col{ padding:14px; }
     }
   </style>
 </head>
 <body>
   <div class="page">
-
-    <div class="apply-grid">
-      <div class="apply-card">
-        <div class="apply-tag">Ютубер</div>
-        <div class="apply-top">
-          <img class="apply-icon" src="yt.jpg" alt="Ютубер">
-          <div class="apply-titlebox">
-            <h2>ЗАЯВКА НА ЮТУБЕРА</h2>
-          </div>
-        </div>
-        <a class="apply-btn open-apply" href="#" data-type="yt" onclick="return false;">Подать заявку</a>
-        <div class="divider"></div>
-        <p class="apply-text">Если ты снимаешь видео по Minecraft, RP-контент, обзоры или ролики по серверу. Ответ придёт тебе в личные сообщения Discord.</p>
-      </div>
-
-      <div class="apply-card">
-        <div class="apply-tag">Игрок</div>
-        <div class="apply-top">
-          <img class="apply-icon" src="mc.jpg" alt="Игрок">
-          <div class="apply-titlebox">
-            <h2>ЗАЯВКА НА ИГРОКА</h2>
-          </div>
-        </div>
-        <a class="apply-btn open-apply" href="#" data-type="player" onclick="return false;">Подать заявку</a>
-        <div class="divider"></div>
-        <p class="apply-text">Для тех, кто хочет играть на сервере как активный участник и развивать своего персонажа. Ответ также придёт в личку Discord.</p>
-      </div>
-
-      <div class="apply-card">
-        <div class="apply-tag">Твич стример</div>
-        <div class="apply-top">
-          <img class="apply-icon" src="tw.jpg" alt="Твич стример">
-          <div class="apply-titlebox">
-            <h2>ЗАЯВКА НА ТВИЧ СТРИМЕРА</h2>
-          </div>
-        </div>
-        <a class="apply-btn open-apply" href="#" data-type="twitch" onclick="return false;">Подать заявку</a>
-        <div class="divider"></div>
-        <p class="apply-text">Если ты ведёшь стримы, показываешь сервер в прямом эфире и делаешь контент для аудитории. Ответ придёт в личные сообщения Discord.</p>
-      </div>
-    </div>
-
     <div class="grid-3">
       <div class="col">
         <div class="head">
@@ -705,6 +320,12 @@
           <div class="titlebox">
             <h1>ИНФОРМАЦИЯ</h1>
           </div>
+        </div>
+
+        <div class="tiny-actions">
+          <a class="btn" href="#" onclick="return false;">Подать заявку на ютубера</a>
+          <a class="btn" href="#" onclick="return false;">Подать заявку на стримера</a>
+          <a class="btn secondary" href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Discord-сервер</a>
         </div>
 
         <div class="divider"></div>
@@ -718,301 +339,93 @@
         <div class="divider"></div>
 
         <h2 class="section-title">Онлайн карта сервера</h2>
-        <p class="small-note">Тыкай на изображение, чтобы посмотреть подробнее</p>
+        <p class="small-note">Тыкай на изображение</p>
         <a href="https://your-map-link-here" target="_blank" rel="noopener" style="display:block">
-          <img class="image map-image lift" src="karta.jpg" alt="karta">
+          <img class="image map-image" src="karta.jpg" alt="karta">
         </a>
-
-        <div class="button-stack">
-          <a class="discord-map-btn" href="#" onclick="return false;">
-            <span class="btn-dot"></span>
-            <span>Discord сервер</span>
-          </a>
-          <a class="youtube-map-btn" href="https://www.youtube.com/" target="_blank" rel="noopener">
-            <span class="btn-dot"></span>
-            <span>YouTube канал сервера</span>
-          </a>
-        </div>
       </div>
 
       <div class="col">
         <h2 class="section-title">Экономика сервера</h2>
-        <img class="image map-image modal-trigger lift" src="iconom.jpg" alt="economy">
+        <img class="image map-image modal-trigger" src="topi.jpg" alt="economy">
         <div class="divider"></div>
-        <p class="text">Соотношение аров к алмазу на сервере. Статистика обновляется раз в неделю. Тыкай на изображение, чтобы посмотреть подробнее.</p>
+        <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
 
         <div class="divider"></div>
 
-        <h2 class="section-title">Топ по активности на сервере</h2>
-        <img class="image map-image modal-trigger-top lift" src="topi.jpg" alt="topi">
+        <h2 class="section-title">Топы по кол-ву ар</h2>
+        <img class="image map-image" src="topi.jpg" alt="topi">
         <div class="divider"></div>
-        <p class="text">Здесь будет отображаться топ игроков по активности на сервере. Статистика обновляется раз в неделю. Тыкай на изображение, чтобы посмотреть подробнее.</p>
+        <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере.</p>
       </div>
 
       <div class="col">
-        <h2 class="section-title">Медиа сервера</h2>
+        <h2 class="section-title">Участники сервера</h2>
         <div class="divider"></div>
         <div class="scroll-y">
           <div class="name-list">
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Walther"><span class="name-text">Walther</span></div>
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Пипеткаа_"><span class="name-text">Пипеткаа_</span></div>
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Ribbon_mc"><span class="name-text">Ribbon_mc</span></div>
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="froog879y"><span class="name-text">froog879y</span></div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <h2 class="section-title">
-          <a href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Администрация сервера</a>
-        </h2>
-        <div class="scroll-y">
-          <div class="name-list">
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Herobro / Hb"><span class="name-text">Herobro / Hb (Агент помощи)</span></div>
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Nina"><span class="name-text">Nina (Тех Админ)</span></div>
-            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Botsus"><span class="name-text">Botsus (Тех Админ)</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wall-block">
-      <div class="wall-top">
-        <img class="wall-logo" src="hitik.jpg" alt="Лого сервера">
-        <div class="wall-titlebox">
-          <h2>СТЕНА СЕРВЕРА</h2>
-        </div>
-      </div>
-
-      <div class="wall-grid">
-        <div class="wall-item">
-          <h3 class="wall-title">Новости</h3>
-          <div class="wall-list">
-            <div class="wall-card post">
-              <img src="post1.jpg" alt="Пост 1" class="post-open" data-full="post1.jpg">
-              <div>
-                <p class="post-title">На сервере обновили стартовую зону: теперь новичкам проще начать путь и быстрее найти полезные точки.</p>
-                <p class="post-meta">25 июня 2026 • <a href="https://discord.com/channels/1409317530748715161/1409324544958664704" target="_blank" rel="noopener">читать дальше</a></p>
-                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
-              </div>
-            </div>
-
-            <div class="wall-card post">
-              <img src="post2.jpg" alt="Пост 2" class="post-open" data-full="post2.jpg">
-              <div>
-                <p class="post-title">Мы добавили больше RP-ориентированных деталей в мир, чтобы атмосфера стала плотнее и живее.</p>
-                <p class="post-meta">25 июня 2026 • <a href="https://discord.com/channels/1409317530748715161/1409324544958664704" target="_blank" rel="noopener">читать дальше</a></p>
-                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wall-item">
-          <h3 class="wall-title">Новости</h3>
-          <div class="wall-list">
-            <div class="wall-card post">
-              <img src="post3.jpg" alt="Пост 3" class="post-open" data-full="post3.jpg">
-              <div>
-                <p class="post-title">Обновили баланс экономики и подправили награды за активность, чтобы играть стало интереснее.</p>
-                <p class="post-meta">25 июня 2026 • <a href="https://discord.com/channels/1409317530748715161/1409324544958664704" target="_blank" rel="noopener">читать дальше</a></p>
-                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
-              </div>
-            </div>
-
-            <div class="wall-card post">
-              <img src="post4.jpg" alt="Пост 4" class="post-open" data-full="post4.jpg">
-              <div>
-                <p class="post-title">Починили часть интерфейса и подготовили основу для будущих ивентов и расширения проекта.</p>
-                <p class="post-meta">25 июня 2026 • <a href="https://discord.com/channels/1409317530748715161/1409324544958664704" target="_blank" rel="noopener">читать дальше</a></p>
-                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wall-item">
-          <h3 class="wall-title">Анонсы</h3>
-          <div class="wall-list">
-            <div class="announce">Открытие сервера 18 июля</div>
-            <div class="announce">Ивент структуриков с 18 по 25 июля</div>
-            <div class="announce">Скоро: новая фракционная линия и дополнительные задания</div>
+            <div class="name">Vexor</div>
+            <div class="name">MisterFox</div>
+            <div class="name">Rake</div>
+            <div class="name">Lunarix</div>
+            <div class="name">Brawler</div>
+            <div class="name">KiraPlay</div>
+            <div class="name">StormNix</div>
+            <div class="name">PixelYT</div>
+            <div class="name">NeroLive</div>
+            <div class="name">Drako</div>
+            <div class="name">Astra</div>
+            <div class="name">Hollow</div>
+            <div class="name">Rift</div>
+            <div class="name">SovaMC</div>
+            <div class="name">Frosty</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Modal for economy image -->
   <div class="modal-overlay" id="economyModal">
     <div class="modal-content">
       <div class="modal-close" id="modalClose">&times;</div>
-      <img src="iconom.jpg" alt="economy full">
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="topModal">
-    <div class="modal-content">
-      <div class="modal-close" id="modalCloseTop">&times;</div>
-      <img src="topi.jpg" alt="top full">
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="newsModal">
-    <div class="modal-content">
-      <div class="modal-close" id="closeNewsModal">&times;</div>
-      <img src="" alt="news full" id="newsModalImg">
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="applyModal">
-    <div class="modal-content apply-modal">
-      <div class="modal-close" id="closeApplyModal">&times;</div>
-      <div class="apply-modal-head">
-        <div class="apply-modal-badge" id="applyModalBadge">Заявка</div>
-        <h2 id="applyModalTitle">ЗАЯВКА</h2>
-        <p id="applyModalText">Заполни поля ниже и отправь заявку на рассмотрение.</p>
-      </div>
-      <form class="apply-form">
-        <label>
-          Майнкрафт никнейм
-          <input type="text" id="applyName" placeholder="Например: Vexor" />
-        </label>
-
-        <label>
-          Discord
-          <input type="text" id="applyDiscord" placeholder="Например: vexor#0001 или @vexor" />
-        </label>
-
-        <label>
-          О себе
-          <textarea id="applyAbout" placeholder="Например: играю активно каждый день, умею записывать контент, люблю RP"></textarea>
-        </label>
-
-        <label>
-          <span id="applyExtraLabel">Почему именно ты?</span>
-          <textarea id="applyWhy" placeholder="Например: хочу помогать проекту, делать контент и быть активным участником"></textarea>
-        </label>
-
-        <a class="apply-send-btn" href="#" onclick="return false;">Отправить заявку</a>
-      </form>
+      <img src="topi.jpg" alt="economy full">
     </div>
   </div>
 
   <script>
-    const economyModal = document.getElementById('economyModal');
-    const economyTriggers = document.querySelectorAll('.modal-trigger');
-    const closeEconomy = document.getElementById('modalClose');
+    const modal = document.getElementById('economyModal');
+    const triggers = document.querySelectorAll('.modal-trigger');
+    const closeBtn = document.getElementById('modalClose');
 
-    function openEconomyModal(){ economyModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function closeEconomyModal(){ economyModal.classList.remove('active'); document.body.style.overflow = ''; }
-
-    economyTriggers.forEach(t => t.addEventListener('click', openEconomyModal));
-    closeEconomy.addEventListener('click', closeEconomyModal);
-    economyModal.addEventListener('click', (e) => { if(e.target === economyModal) closeEconomyModal(); });
-
-    const topModal = document.getElementById('topModal');
-    const topTriggers = document.querySelectorAll('.modal-trigger-top');
-    const closeTop = document.getElementById('modalCloseTop');
-
-    function openTopModal(){ topModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function closeTopModal(){ topModal.classList.remove('active'); document.body.style.overflow = ''; }
-
-    topTriggers.forEach(t => t.addEventListener('click', openTopModal));
-    closeTop.addEventListener('click', closeTopModal);
-    topModal.addEventListener('click', (e) => { if(e.target === topModal) closeTopModal(); });
-
-    const newsModal = document.getElementById('newsModal');
-    const newsModalImg = document.getElementById('newsModalImg');
-    const closeNewsModal = document.getElementById('closeNewsModal');
-    const postImages = document.querySelectorAll('.post-open');
-
-    function openNewsModal(src){
-      newsModalImg.src = src;
-      newsModal.classList.add('active');
+    function openModal(){
+      modal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeNews(){
-      newsModal.classList.remove('active');
-      newsModalImg.src = '';
+    function closeModal(){
+      modal.classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    postImages.forEach(img => {
-      img.addEventListener('click', () => openNewsModal(img.dataset.full));
-    });
-
-    closeNewsModal.addEventListener('click', closeNews);
-    newsModal.addEventListener('click', (e) => {
-      if(e.target === newsModal) closeNews();
-    });
-
-    const applyModal = document.getElementById('applyModal');
-    const closeApplyModal = document.getElementById('closeApplyModal');
-    const openApplyButtons = document.querySelectorAll('.open-apply');
-    const applyModalBadge = document.getElementById('applyModalBadge');
-    const applyModalTitle = document.getElementById('applyModalTitle');
-    const applyModalText = document.getElementById('applyModalText');
-    const applyAbout = document.getElementById('applyAbout');
-    const applyWhy = document.getElementById('applyWhy');
-    const applyExtraLabel = document.getElementById('applyExtraLabel');
-
-    function setApplyForm(type){
-      if(type === 'yt'){
-        applyModalBadge.textContent = 'Ютубер';
-        applyModalTitle.textContent = 'ЗАЯВКА НА ЮТУБЕРА';
-        applyModalText.textContent = 'Заполни заявку и приложи видео-гайд: расскажи немного о себе, покажи свой монтаж. Видео должно быть от 30 секунд.';
-        applyExtraLabel.textContent = 'Видео-гайд';
-        applyAbout.placeholder = 'Например: снимаю Minecraft, RP и обзоры на серверы';
-        applyWhy.placeholder = 'Например: в видео расскажи о себе, покажи монтаж и вставь фрагменты своих роликов от 30 секунд';
-      }
-
-      if(type === 'player'){
-        applyModalBadge.textContent = 'Игрок';
-        applyModalTitle.textContent = 'ЗАЯВКА НА ИГРОКА';
-        applyModalText.textContent = 'Заполни заявку, если хочешь попасть в проект как активный участник.';
-        applyExtraLabel.textContent = 'Почему именно ты?';
-        applyAbout.placeholder = 'Например: люблю RP, играю каждый день, умею в командную игру';
-        applyWhy.placeholder = 'Например: хочу участвовать в жизни сервера и развивать своего персонажа';
-      }
-
-      if(type === 'twitch'){
-        applyModalBadge.textContent = 'Твич стример';
-        applyModalTitle.textContent = 'ЗАЯВКА НА ТВИЧ СТРИМЕРА';
-        applyModalText.textContent = 'Укажи ссылку на Twitch-стрим и средний онлайн. Нам важно видеть стабильность и активность.';
-        applyExtraLabel.textContent = 'Ссылка на стрим и средний онлайн';
-        applyAbout.placeholder = 'Например: https://twitch.tv/yourname';
-        applyWhy.placeholder = 'Например: средний онлайн 10 человек, стримлю Minecraft и RP несколько раз в неделю';
-      }
-    }
-
-    function openApplyModal(type){
-      setApplyForm(type);
-      applyModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeApply(){
-      applyModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    openApplyButtons.forEach(btn => {
-      btn.addEventListener('click', () => openApplyModal(btn.dataset.type));
-    });
-
-    closeApplyModal.addEventListener('click', closeApply);
-    applyModal.addEventListener('click', (e) => {
-      if(e.target === applyModal) closeApply();
+    triggers.forEach(t => t.addEventListener('click', openModal));
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeModal();
     });
 
     document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape'){
-        if(economyModal.classList.contains('active')) closeEconomyModal();
-        if(topModal.classList.contains('active')) closeTopModal();
-        if(newsModal.classList.contains('active')) closeNews();
-        if(applyModal.classList.contains('active')) closeApply();
+      if(e.key === 'Escape' && modal.classList.contains('active')){
+        closeModal();
       }
+    });
+
+    // Parallax background movement
+    const page = document.querySelector('.page');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      document.body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
     });
   </script>
 </body>
