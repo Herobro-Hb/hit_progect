@@ -9,14 +9,13 @@
       --panel:#111111;
       --panel2:#151515;
       --line:#2b2b2b;
-      --line2:#4a0000;
       --text:#f5f5f5;
       --muted:#b7b7b7;
       --red:#d70000;
       --red2:#ff2b2b;
       --radius:22px;
       --shadow:0 18px 48px rgba(0,0,0,.38);
-      --shadow-red:0 12px 28px rgba(215,0,0,.16);
+      --glass:rgba(255,255,255,.04);
     }
 
     *{box-sizing:border-box}
@@ -24,8 +23,8 @@
       margin:0;
       padding:0;
       background:
-        radial-gradient(circle at 50% 50%, rgba(215,0,0,.16), transparent 28%),
-        linear-gradient(180deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,.75) 100%),
+        radial-gradient(circle at 50% 50%, rgba(215,0,0,.18), transparent 30%),
+        linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.88) 100%),
         url('fonchik.jpg') center/cover fixed;
       color:var(--text);
       font-family:Arial, Helvetica, sans-serif;
@@ -60,10 +59,6 @@
       border-left:1px solid var(--line);
     }
 
-    .col:hover{
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
-    }
-
     .head{
       display:flex;
       gap:14px;
@@ -79,12 +74,6 @@
       object-fit:cover;
       flex:0 0 auto;
       box-shadow:0 10px 20px rgba(0,0,0,.32);
-      transition:transform .3s ease, filter .3s ease;
-    }
-
-    .grid-3:hover .icon{
-      transform:scale(1.03) rotate(-1deg);
-      filter:brightness(1.05);
     }
 
     .titlebox{
@@ -113,6 +102,16 @@
       text-transform:uppercase;
       letter-spacing:.7px;
       font-size:1.02rem;
+    }
+
+    .section-title a{
+      color:#ff4a4a;
+      text-decoration:none;
+      transition:color .2s ease;
+    }
+
+    .section-title a:hover{
+      color:#ff2b2b;
     }
 
     .text{
@@ -161,23 +160,20 @@
       border-color:#333;
     }
 
-    .btn.secondary:hover{
-      box-shadow:0 12px 22px rgba(0,0,0,.25);
-    }
-
     .image{
       width:100%;
       display:block;
       border-radius:18px;
       border:1px solid #303030;
       object-fit:cover;
-      transition:transform .3s ease, filter .3s ease;
+      transition:transform .3s ease, filter .3s ease, box-shadow .3s ease;
       cursor:pointer;
     }
 
-    .image:hover{
-      transform:scale(1.01);
-      filter:brightness(1.03);
+    .lift:hover{
+      transform:translateY(-5px);
+      box-shadow:0 14px 26px rgba(0,0,0,.28);
+      filter:brightness(1.04);
     }
 
     .map-image{
@@ -185,7 +181,7 @@
     }
 
     .scroll-y{
-      max-height:280px;
+      max-height:210px;
       overflow-y:auto;
       padding-right:6px;
       scrollbar-color:#ff2b2b #1a1a1a;
@@ -197,12 +193,13 @@
     }
 
     .name{
-      padding:10px 12px;
-      border-radius:12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 10px;
+      border-radius:14px;
       border:1px solid #2f2f2f;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      text-align:center;
-      font-weight:700;
       transition:transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
@@ -212,10 +209,196 @@
       border-color:#4a1717;
     }
 
+    .name:hover .avatar{
+      border-color:#ff8a8a;
+      box-shadow:0 0 0 2px rgba(215,0,0,.14), 0 4px 10px rgba(0,0,0,.28);
+      filter:brightness(1.05);
+    }
+
+    .avatar{
+      width:26px;
+      height:26px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.22);
+      object-fit:cover;
+      flex:0 0 auto;
+      box-shadow:0 4px 10px rgba(0,0,0,.28);
+      transition:filter .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .name-text{
+      font-weight:700;
+      line-height:1.25;
+      font-size:.93rem;
+    }
+
     .small-note{
       color:#ddd;
       font-size:.9rem;
       margin-top:10px;
+    }
+
+    .wall-block{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), linear-gradient(180deg, var(--panel), #0f0f0f);
+      box-shadow:var(--shadow);
+      animation:fadeUp .7s ease both;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .wall-block::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,43,43,.12) 25%, transparent 50%, rgba(255,43,43,.08) 75%, transparent 100%);
+      transform:translateX(-100%);
+      animation:shine 7s linear infinite;
+      pointer-events:none;
+    }
+
+    .wall-top{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:16px;
+      position:relative;
+      z-index:1;
+    }
+
+    .wall-logo{
+      width:74px;
+      height:74px;
+      border-radius:18px;
+      border:1px solid #444;
+      object-fit:cover;
+      box-shadow:0 10px 20px rgba(0,0,0,.32);
+      animation:pulse 3.8s ease-in-out infinite;
+    }
+
+    .wall-titlebox{
+      flex:1;
+      min-height:74px;
+      border-radius:18px;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      border:1px solid rgba(215,0,0,.35);
+      background:
+        linear-gradient(135deg, rgba(215,0,0,.24), rgba(255,255,255,.02)),
+        linear-gradient(180deg, rgba(34,34,34,.92), rgba(17,17,17,.96));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .wall-titlebox h2{
+      margin:0;
+      font-size:clamp(1.45rem, 2vw, 2rem);
+      letter-spacing:3px;
+      text-transform:uppercase;
+      text-shadow:0 0 18px rgba(215,0,0,.18);
+    }
+
+    .wall-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .wall-item{
+      border:1px solid #2f2f2f;
+      border-radius:18px;
+      padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      backdrop-filter:blur(6px);
+      box-shadow:0 10px 26px rgba(0,0,0,.16);
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .wall-item:hover{
+      transform:translateY(-4px);
+      border-color:#5b2020;
+      box-shadow:0 16px 34px rgba(0,0,0,.24);
+    }
+
+    .wall-title{
+      margin:0 0 10px;
+      font-size:1rem;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .wall-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .wall-card{
+      padding:12px;
+      border-radius:14px;
+      background:linear-gradient(180deg, rgba(17,17,17,.97), rgba(25,25,25,.95));
+      border:1px solid #363636;
+      color:#d9d9d9;
+      box-shadow:0 8px 18px rgba(0,0,0,.16);
+      transform:translateY(0);
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .wall-card:hover{
+      transform:translateY(-2px);
+      border-color:#6a2a2a;
+      background:linear-gradient(180deg, rgba(31,18,18,.98), rgba(25,25,25,.96));
+    }
+
+    .post{
+      display:grid;
+      gap:10px;
+    }
+
+    .post img{
+      width:100%;
+      border-radius:14px;
+      border:1px solid #343434;
+      aspect-ratio: 16 / 9;
+      object-fit:cover;
+    }
+
+    .post-title{
+      font-size:.98rem;
+      font-weight:800;
+      line-height:1.35;
+      margin:0;
+    }
+
+    .post-meta{
+      font-size:.78rem;
+      color:#9f9f9f;
+      margin:0;
+    }
+
+    .post-note{
+      font-size:.68rem;
+      color:#8f8f8f;
+      margin:0;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
+
+    .announce{
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid #3a3a3a;
+      background:linear-gradient(135deg, rgba(215,0,0,.12), rgba(255,255,255,.03));
+      font-weight:700;
+      line-height:1.35;
+      min-height:58px;
+      display:flex;
+      align-items:center;
+      box-shadow:0 8px 18px rgba(0,0,0,.14);
     }
 
     @keyframes fadeUp{
@@ -223,11 +406,20 @@
       to{ opacity:1; transform:translateY(0); }
     }
 
-    /* Modal styles */
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); filter:brightness(1); }
+      50%{ transform:scale(1.03); filter:brightness(1.08); }
+    }
+
+    @keyframes shine{
+      0%{ transform:translateX(-100%); }
+      100%{ transform:translateX(100%); }
+    }
+
     .modal-overlay{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.78);
+      background:rgba(0,0,0,.82);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -299,6 +491,9 @@
         border-left:none;
         border-top:1px solid var(--line);
       }
+      .wall-grid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 720px){
@@ -308,6 +503,8 @@
       .btn{ width:100%; }
       .grid-3{ border-radius:18px; }
       .col{ padding:14px; }
+      .wall-top{ flex-direction:column; align-items:stretch; }
+      .wall-logo{ width:100%; height:110px; }
     }
   </style>
 </head>
@@ -325,6 +522,7 @@
         <div class="tiny-actions">
           <a class="btn" href="#" onclick="return false;">Подать заявку на ютубера</a>
           <a class="btn" href="#" onclick="return false;">Подать заявку на стримера</a>
+          <a class="btn" href="#" onclick="return false;">Подать заявку на игрока</a>
           <a class="btn secondary" href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Discord-сервер</a>
         </div>
 
@@ -339,93 +537,180 @@
         <div class="divider"></div>
 
         <h2 class="section-title">Онлайн карта сервера</h2>
-        <p class="small-note">Тыкай на изображение</p>
+        <p class="small-note">Тыкай на изображение, чтобы посмотреть подробнее</p>
         <a href="https://your-map-link-here" target="_blank" rel="noopener" style="display:block">
-          <img class="image map-image" src="karta.jpg" alt="karta">
+          <img class="image map-image lift" src="karta.jpg" alt="karta">
         </a>
       </div>
 
       <div class="col">
         <h2 class="section-title">Экономика сервера</h2>
-        <img class="image map-image modal-trigger" src="topi.jpg" alt="economy">
+        <img class="image map-image modal-trigger lift" src="iconom.jpg" alt="economy">
         <div class="divider"></div>
-        <p class="text">Миниатюра экономики сервера. Статистика обновляется каждый день.</p>
+        <p class="text">Соотношение аров к алмазу на сервере. Статистика обновляется раз в неделю. Тыкай на изображение, чтобы посмотреть подробнее.</p>
 
         <div class="divider"></div>
 
-        <h2 class="section-title">Топы по кол-ву ар</h2>
-        <img class="image map-image" src="topi.jpg" alt="topi">
+        <h2 class="section-title">Топ по активности на сервере</h2>
+        <img class="image map-image modal-trigger-top lift" src="topi.jpg" alt="topi">
         <div class="divider"></div>
-        <p class="text">Здесь будет отображаться топ игроков по количеству ар на сервере.</p>
+        <p class="text">Здесь будет отображаться топ игроков по активности на сервере. Статистика обновляется раз в неделю. Тыкай на изображение, чтобы посмотреть подробнее.</p>
       </div>
 
       <div class="col">
-        <h2 class="section-title">Участники сервера</h2>
+        <h2 class="section-title">Медиа сервера</h2>
         <div class="divider"></div>
         <div class="scroll-y">
           <div class="name-list">
-            <div class="name">Vexor</div>
-            <div class="name">MisterFox</div>
-            <div class="name">Rake</div>
-            <div class="name">Lunarix</div>
-            <div class="name">Brawler</div>
-            <div class="name">KiraPlay</div>
-            <div class="name">StormNix</div>
-            <div class="name">PixelYT</div>
-            <div class="name">NeroLive</div>
-            <div class="name">Drako</div>
-            <div class="name">Astra</div>
-            <div class="name">Hollow</div>
-            <div class="name">Rift</div>
-            <div class="name">SovaMC</div>
-            <div class="name">Frosty</div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Vexor"><span class="name-text">Vexor</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="MisterFox"><span class="name-text">MisterFox</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Rake"><span class="name-text">Rake</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Lunarix"><span class="name-text">Lunarix</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Brawler"><span class="name-text">Brawler</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="KiraPlay"><span class="name-text">KiraPlay</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="StormNix"><span class="name-text">StormNix</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="PixelYT"><span class="name-text">PixelYT</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="NeroLive"><span class="name-text">NeroLive</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Drako"><span class="name-text">Drako</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Astra"><span class="name-text">Astra</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Hollow"><span class="name-text">Hollow</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Rift"><span class="name-text">Rift</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="SovaMC"><span class="name-text">SovaMC</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Frosty"><span class="name-text">Frosty</span></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="section-title">
+          <a href="https://discord.gg/Tk23MHSsvC" target="_blank" rel="noopener">Администрация сервера</a>
+        </h2>
+        <div class="scroll-y">
+          <div class="name-list">
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Herobro / Hb"><span class="name-text">Herobro / Hb (Агент помощи)</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Nina"><span class="name-text">Nina (Тех Админ)</span></div>
+            <div class="name"><img class="avatar" src="avatarHead_simple.jpg" alt="Botsus"><span class="name-text">Botsus (Тех Админ)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wall-block">
+      <div class="wall-top">
+        <img class="wall-logo" src="logo.jpg" alt="Лого сервера">
+        <div class="wall-titlebox">
+          <h2>СТЕНА СЕРВЕРА</h2>
+        </div>
+      </div>
+
+      <div class="wall-grid">
+        <div class="wall-item">
+          <h3 class="wall-title">Новости</h3>
+          <div class="wall-list">
+            <div class="wall-card post">
+              <img src="post1.jpg" alt="Пост 1">
+              <div>
+                <p class="post-title">На сервере обновили стартовую зону: теперь новичкам проще начать путь и быстрее найти полезные точки.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
+
+            <div class="wall-card post">
+              <img src="post2.jpg" alt="Пост 2">
+              <div>
+                <p class="post-title">Мы добавили больше RP-ориентированных деталей в мир, чтобы атмосфера стала плотнее и живее.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wall-item">
+          <h3 class="wall-title">Новости</h3>
+          <div class="wall-list">
+            <div class="wall-card post">
+              <img src="post3.jpg" alt="Пост 3">
+              <div>
+                <p class="post-title">Обновили баланс экономики и подправили награды за активность, чтобы играть стало интереснее.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
+
+            <div class="wall-card post">
+              <img src="post4.jpg" alt="Пост 4">
+              <div>
+                <p class="post-title">Починили часть интерфейса и подготовили основу для будущих ивентов и расширения проекта.</p>
+                <p class="post-meta">25 июня 2026 • Новости сервера</p>
+                <p class="post-note">тыкай на фото, чтобы посмотреть подробнее</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wall-item">
+          <h3 class="wall-title">Анонсы</h3>
+          <div class="wall-list">
+            <div class="announce">Открытие сервера 18 июля</div>
+            <div class="announce">Ивент структуриков с 18 по 25 июля</div>
+            <div class="announce">Скоро: новая фракционная линия и дополнительные задания</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal for economy image -->
   <div class="modal-overlay" id="economyModal">
     <div class="modal-content">
       <div class="modal-close" id="modalClose">&times;</div>
-      <img src="topi.jpg" alt="economy full">
+      <img src="iconom.jpg" alt="economy full">
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="topModal">
+    <div class="modal-content">
+      <div class="modal-close" id="modalCloseTop">&times;</div>
+      <img src="topi.jpg" alt="top full">
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="postModal">
+    <div class="modal-content">
+      <div class="modal-close" id="modalClosePost">&times;</div>
+      <img src="post1.jpg" alt="post full">
     </div>
   </div>
 
   <script>
-    const modal = document.getElementById('economyModal');
-    const triggers = document.querySelectorAll('.modal-trigger');
-    const closeBtn = document.getElementById('modalClose');
+    const economyModal = document.getElementById('economyModal');
+    const economyTriggers = document.querySelectorAll('.modal-trigger');
+    const closeEconomy = document.getElementById('modalClose');
 
-    function openModal(){
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+    function openEconomyModal(){ economyModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeEconomyModal(){ economyModal.classList.remove('active'); document.body.style.overflow = ''; }
 
-    function closeModal(){
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    economyTriggers.forEach(t => t.addEventListener('click', openEconomyModal));
+    closeEconomy.addEventListener('click', closeEconomyModal);
+    economyModal.addEventListener('click', (e) => { if(e.target === economyModal) closeEconomyModal(); });
 
-    triggers.forEach(t => t.addEventListener('click', openModal));
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) closeModal();
-    });
+    const topModal = document.getElementById('topModal');
+    const topTriggers = document.querySelectorAll('.modal-trigger-top');
+    const closeTop = document.getElementById('modalCloseTop');
+
+    function openTopModal(){ topModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeTopModal(){ topModal.classList.remove('active'); document.body.style.overflow = ''; }
+
+    topTriggers.forEach(t => t.addEventListener('click', openTopModal));
+    closeTop.addEventListener('click', closeTopModal);
+    topModal.addEventListener('click', (e) => { if(e.target === topModal) closeTopModal(); });
 
     document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && modal.classList.contains('active')){
-        closeModal();
+      if(e.key === 'Escape'){
+        if(economyModal.classList.contains('active')) closeEconomyModal();
+        if(topModal.classList.contains('active')) closeTopModal();
       }
-    });
-
-    // Parallax background movement
-    const page = document.querySelector('.page');
-    document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      document.body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
     });
   </script>
 </body>
